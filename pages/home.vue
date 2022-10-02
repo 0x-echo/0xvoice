@@ -2,9 +2,10 @@
   <main
     class="app-main">
     <app-main-content
-      :posts="posts">
+      :posts="posts"
+      title="Home">
       <template
-        #header>
+        #top>
         <editor-box>
         </editor-box>
       </template>

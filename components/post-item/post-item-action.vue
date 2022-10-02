@@ -1,7 +1,8 @@
 <template>
   <div
     class="post-item-action"
-    role="button">
+    role="button"
+    @click.stop>
     <span
       class="post-item-action__icon"
       :class="[`post-item-action__icon--${value}`, {

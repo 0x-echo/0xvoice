@@ -1,7 +1,8 @@
 <template>
   <main
     class="app-main">
-    <app-main-content>
+    <app-main-content
+      title="Thread">
       <post-item
         :data="data"
         is-full>

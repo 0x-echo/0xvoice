@@ -1,8 +1,22 @@
 <template>
   <div
     class="app-main-content">
+    <div
+      class="app-main-content__header"
+      v-if="title">
+      <i
+        class="ri-arrow-left-line app-main-content__back-icon"
+        v-if="hasBack">
+      </i>
+      
+      <h2
+        class="app-main-content__title">
+        {{ title }}
+      </h2>
+    </div>
+    
     <slot
-      name="header">
+      name="top">
     </slot>
     
     <slot>
@@ -17,8 +31,15 @@
 
 <script setup>
 const props = defineProps({
+  hasBack: {
+    type: Boolean,
+    default: false
+  },
   posts: {
     type: Array
+  },
+  title: {
+    type: String
   }
 })
 </script>
@@ -26,5 +47,10 @@ const props = defineProps({
 <style lang="scss">
 .app-main-content {
   flex: 1;
+  
+  &__header {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>

@@ -2,9 +2,10 @@
   <main
     class="app-main">
     <app-main-content
-      :posts="posts">
+      :posts="posts"
+      :title="profile.screen_name">
       <template
-        #header>
+        #top>
         <profile-box
           :data="profile">
         </profile-box>

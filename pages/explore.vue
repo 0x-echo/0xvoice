@@ -2,7 +2,8 @@
   <main
     class="app-main">
     <app-main-content
-      :posts="posts">
+      :posts="posts"
+      title="Explore">
     </app-main-content>
     
     <app-side-content>
