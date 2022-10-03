@@ -47,10 +47,12 @@ const props = defineProps({
 <style lang="scss">
 .app-main-content {
   flex: 1;
+  padding: 32px;
   
   &__header {
     display: flex;
     align-items: center;
+    padding-bottom: 32px;
   }
 }
 </style>

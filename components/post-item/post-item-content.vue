@@ -6,35 +6,78 @@
     }">
     <div
       class="post-item-content__title">
-      <router-link
-        class="post-item-content__avatar"
-        v-if="hasAvatar"
-        :to="`/${data.author.screen_name}`"
-        @click.stop>
-        <v-avatar
-          class="post-item-content__avatar-image"
-          :alt="data.author.screen_name"
-          :hash="data.author.address"
-          :size="24"
-          :src="data.author.avatar || ''">
-        </v-avatar>
-      </router-link>
+      <div
+        class="post-item-content__info">
+        <router-link
+          class="post-item-content__avatar"
+          v-if="hasAvatar"
+          :to="`/${data.author.screen_name}`"
+          @click.stop>
+          <v-avatar
+            class="post-item-content__avatar-image"
+            :alt="data.author.screen_name"
+            :hash="data.author.address"
+            :size="24"
+            :src="data.author.avatar || ''">
+          </v-avatar>
+        </router-link>
+        
+        <router-link
+          class="post-item-content__byline"
+          :to="`/${data.author.screen_name}`"
+          @click.stop>
+          {{ data.author.screen_name }}
+        </router-link>
+        
+        <span
+          class="post-item-content__date"
+          v-if="!isFull">
+          {{ data.posted_at }}
+          <!-- <timeago 
+            :datetime="data.posted_at" 
+            :title="$formatDate(data.posted_at)" /> -->
+        </span>
+      </div>
       
-      <router-link
-        class="post-item-content__byline"
-        :to="`/${data.author.screen_name}`"
-        @click.stop>
-        {{ data.author.screen_name }}
-      </router-link>
-      
-      <span
-        class="post-item-content__date"
-        v-if="!isFull">
-        {{ data.posted_at }}
-        <!-- <timeago 
-          :datetime="data.posted_at" 
-          :title="$formatDate(data.posted_at)" /> -->
-      </span>
+      <div
+        v-if="hasMenu">
+        <el-popover
+          ref="menuRef"
+          placement="bottom-end"
+          trigger="click"
+          :width="200"
+          @before-leave="menuActive = false"
+          @show="menuActive = true">
+          <div>
+            <menu-item
+              icon="ri-flag-line"
+              label="Report"
+              @on-click="onClickMenu('report')">
+            </menu-item>
+            
+            <menu-item
+              danger
+              icon="ri-delete-bin-line"
+              label="Delete"
+              @on-click="onClickMenu('delete')">
+            </menu-item>
+          </div>
+          
+          <template 
+            #reference>
+            <div
+              class="post-item-content__menu"
+              :class="{
+                'active': menuActive
+              }"
+              @click.stop>
+              <i
+                class="ri-more-fill">
+              </i>
+            </div>
+          </template>
+        </el-popover>
+      </div>
     </div>
     
     <div
@@ -99,7 +142,7 @@
 </template>
 
 <script setup>
-import { ElButton, ElImage } from 'element-plus'
+import { ElButton, ElImage, ElPopover } from 'element-plus'
 import { parseContent } from '../../libs/content-parser'
 
 const props = defineProps({
@@ -110,6 +153,10 @@ const props = defineProps({
   hasAvatar: {
     type: Boolean,
     default: false
+  },
+  hasMenu: {
+    type: Boolean,
+    default: true
   },
   isFull: {
     type: Boolean,
@@ -135,6 +182,13 @@ const toggleContent = () => {
   //   })
   // }
 }
+
+let menuActive = ref(false)
+const menuRef = ref(null)
+
+const onClickMenu = (value) => {
+  menuRef.value.hide()
+}
 </script>
 
 <style lang="scss">
@@ -153,7 +207,13 @@ const toggleContent = () => {
   &__title {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-size: 15px;
+  }
+  
+  &__info {
+    display: flex;
+    align-items: center;
   }
   
   &__avatar {
@@ -169,6 +229,23 @@ const toggleContent = () => {
   &__date {
     margin-left: 8px;
     color: var(--text-color-muted);
+  }
+  
+  &__menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: var(--text-color-muted);
+    transition: all .3s ease;
+    
+    &.active,
+    &:hover {
+      background: var(--bg-color);
+      color: var(--text-color-primary);
+    }
   }
   
   &__subtitle {

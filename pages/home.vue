@@ -47,6 +47,7 @@ const posts = [{
   },
   is_reposted: true,
   ori_post: {
+    id: '21',
     author: {
       screen_name: '0xJoanne',
       address: '0x12323',
@@ -64,6 +65,7 @@ const posts = [{
   },
   is_reposted: true,
   ori_post: {
+    id: '31',
     author: {
       screen_name: '0xJoanne',
       address: '0x12323',

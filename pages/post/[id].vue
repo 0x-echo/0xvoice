@@ -2,8 +2,10 @@
   <main
     class="app-main">
     <app-main-content
-      title="Thread">
+      title="Post">
       <post-item
+        :border="false"
+        :clickable="false"
         :data="data"
         is-full>
       </post-item>

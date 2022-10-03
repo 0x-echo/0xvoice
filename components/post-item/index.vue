@@ -1,7 +1,11 @@
 <template>
   <div
     class="post-item"
-    @click="$router.push(`/post/${data.id}`)">
+    :class="{
+      'is-border': border,
+      'is-clickable': clickable
+    }"
+    @click="onClick">
     <div
       class="post-item__header"
       v-if="data.is_reposted && !data.content">
@@ -45,10 +49,11 @@
         <div
           class="post-item__repost-card"
           v-if="post.ori_post"
-          @click.stop="$router.push(`/${post.ori_post.author.screen_name}`)">
+          @click.stop="router.push(`/post/${post.ori_post.id}`)">
           <post-item-content
             :data="post.ori_post"
-            has-avatar>
+            has-avatar
+            :has-menu="false">
           </post-item-content>
         </div>
         
@@ -67,7 +72,17 @@ import PostItemToolbar from './post-item-toolbar'
 import { ElButton } from 'element-plus'
 import { Timeago } from 'vue2-timeago'
 
+const router = useRouter()
+
 const props = defineProps({
+  border: {
+    type: Boolean,
+    default: true
+  },
+  clickable: {
+    type: Boolean,
+    default: true
+  },
   data: {
     type: Object,
     required: true
@@ -85,14 +100,38 @@ const post = computed(() => {
     return props.data
   }
 })
+
+const onClick = () => {
+  if (props.clickable) {
+    router.push(`/post/${props.data.id}`)
+  }
+}
+
+const onClickRepost = () => {
+  console.log(post.value.ori_post.author.screen_name)
+  router.push(`/${post.value.ori_post.author.screen_name}`)
+}
 </script>
 
 <style lang="scss">
 .post-item {
-  padding: 32px;
-  border-bottom: 1px solid var(--bg-color);
+  margin-bottom: 24px;
   line-height: 1.625;
-  cursor: pointer;
+  
+  &.is-border {
+    padding: 24px;
+    border: 1px solid var(--bg-color);
+    border-radius: var(--border-radius);
+    transition: all .3s ease;
+    
+    &:hover {
+      border-color: var(--border-color);
+    }
+  }
+  
+  &.is-clickable {
+    cursor: pointer;
+  }
   
   &__header {
     margin-bottom: 16px;
@@ -129,10 +168,15 @@ const post = computed(() => {
   &__repost-card {
     padding: 16px;
     margin-top: 16px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--bg-color);
     border-radius: var(--border-radius);
     background: white;
     cursor: pointer;
+    transition: all .3s ease;
+    
+    &:hover {
+      border-color: var(--border-color);
+    }
   }
 }
 </style>

@@ -15,6 +15,7 @@
 <style lang="scss">
 .app {
   display: flex;
+  padding: 0 20px;
   max-width: 1400px;
   margin: 0 auto;
 }

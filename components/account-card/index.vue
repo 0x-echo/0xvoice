@@ -3,10 +3,10 @@
     class="account-card">
     <div
       class="account-card__header">
-      <h2
+      <h3
         class="account-card__title">
         You might like
-      </h2>
+      </h3>
     </div>
     
     <div>
@@ -32,8 +32,16 @@ const props = defineProps({
 
 <style lang="scss">
 .account-card {
+  padding: 12px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--bg-color);
+  
   &__header {
-    margin-bottom: 16px;
+    padding: 12px;
+  }
+  
+  &__title {
+    font-size: 16px;
   }
 }
 </style>

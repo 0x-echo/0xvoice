@@ -36,13 +36,15 @@ const props = defineProps({
   padding: 0 16px;
   border-radius: var(--border-radius);
   color: var(--text-color-secondary);
+  transition: all .3s ease;
   
-  &:hover {
-    
+  &:hover,
+  &.active {
+    background: var(--color-primary-lighter);
   }
   
-  &.active {
-    background: var(--bg-color);
+  & + & {
+    margin-top: 5px;
   }
   
   &__icon {

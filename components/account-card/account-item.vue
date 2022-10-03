@@ -1,28 +1,26 @@
 <template>
   <div
-    class="account-item">
-    <router-link
+    class="account-item"
+    @click="$router.push(`/${data.screen_name}`)">
+    <v-avatar
       class="account-item__avatar"
-      :to="data.address">
-      <v-avatar
-        :alt="data.screen_name"
-        :hash="data.address"
-        :size="36"
-        :src="data.avatar || ''">
-      </v-avatar>
-    </router-link>
+      :alt="data.screen_name"
+      :hash="data.address"
+      :src="data.avatar || ''">
+    </v-avatar>
     
     <div
       class="account-item__content">
-      <router-link
-        class="acccount-item__name"
+      <div
+        class="account-item__name"
         :to="data.address">
         {{ data.screen_name }}
-      </router-link>
+      </div>
     </div>
     
     <el-button
-      class="account-item__follow-button">
+      class="account-item__follow-button"
+      @click.stop>
       Follow
     </el-button>
   </div>
@@ -43,14 +41,24 @@ const props = defineProps({
 .account-item {
   display: flex;
   align-items: center;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all .3s ease;
   
-  &__avatar {
-    display: flex;
+  &:hover {
+    background: var(--bg-color);
   }
-  
+
   &__content {
     flex: 1;
     margin: 0 16px;
+  }
+  
+  &__name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color-primary);
   }
 }
 </style>
