@@ -22,7 +22,7 @@
     <el-button
       class="account-item__follow-button"
       @click.stop>
-      Follow
+      {{ data.is_following ? 'Following' : 'Follow' }}
     </el-button>
   </div>
 </template>
@@ -60,6 +60,21 @@ const props = defineProps({
     font-size: 14px;
     font-weight: 500;
     color: var(--text-color-primary);
+  }
+  
+  &__follow-button {
+    &,
+    &:focus:not(.el-button:hover) {
+      border-color: var(--color-primary);
+      background: transparent;
+      color: var(--color-primary);
+    }
+    
+    &:hover,
+    &:focus {
+      background: var(--color-primary);
+      color: white;
+    }
   }
 }
 </style>

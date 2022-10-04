@@ -1,9 +1,12 @@
 <template>
   <div
     class="app-side-content">
-    <account-card
-      :data="accounts">
-    </account-card>
+    <div
+      class="app-side-content__content">
+      <account-card
+        :data="accounts">
+      </account-card>
+    </div>
     
     <div
       class="app-side-content__footer">
@@ -35,12 +38,14 @@ const accounts = [{
   id: '1',
   screen_name: 'Airyland',
   address: '0x1203242',
-  avatar: ''
+  avatar: '',
+  is_following: false
 }, {
   id: '2',
   screen_name: 'Joanne',
   address: '0x1203242',
-  avatar: ''
+  avatar: '',
+  is_following: true
 }]
 
 const footerLinks = [{
@@ -54,6 +59,8 @@ const footerLinks = [{
 
 <style lang="scss">
 .app-side-content {
+  display: flex;
+  flex-direction: column;
   width: 350px;
   height: 100vh;
   padding: 32px 0 32px 32px;
@@ -61,6 +68,10 @@ const footerLinks = [{
   
   &::-webkit-scrollbar {
     display: none;
+  }
+  
+  &__content {
+    flex: 1;
   }
   
   &__footer {
