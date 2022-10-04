@@ -32,6 +32,29 @@
         type="primary">
         Connect Wallet
       </el-button>
+      
+      <div
+        class="app-sidebar__user">
+        <v-avatar
+          class="app-sidebar__user-avatar"
+          :alt="profile.screen_name"
+          :hash="profile.address"
+          size="small"
+          :src="profile.avatar || ''">
+        </v-avatar>
+        
+        <div
+          class="app-sidebar__user-content">
+          <div
+            class="app-sidebar__user-name">
+            {{ profile.screen_name }}
+          </div>
+        </div>
+        
+        <i
+          class="ri-more-fill">
+        </i>
+      </div>
     </div>
   </aside>
 </template>
@@ -57,18 +80,24 @@ const nav = [{
   label: 'Settings',
   url: '/settings'
 }]
+
+const profile = {
+  id: 'hello',
+  screen_name: '0xJoanne',
+  bio: 'hello world',
+  address: '0x1234343',
+  avatar: 'https://s3.coinmarketcap.com/static/img/portraits/6273a4ca7d1c136ae3842025.png'
+}
 </script>
 
 <style lang="scss">
 .app-sidebar {
-  position: sticky;
-  top: 0;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   width: 260px;
   height: 100vh;
-  padding: 32px 0;
+  padding: 32px 32px 32px 0;
   overflow-y: auto;
   
   &::-webkit-scrollbar {
@@ -99,6 +128,20 @@ const nav = [{
   &__connect-button {
     width: 100%;
     font-weight: 600;
+  }
+  
+  &__user {
+    display: flex;
+    align-items: center;
+  }
+  
+  &__user-content {
+    flex: 1;
+    margin: 0 12px;
+  }
+  
+  &__user-name {
+    font-size: 14px;
   }
 }
 </style>

@@ -23,13 +23,12 @@ li {
 }
 
 body {
-  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-color);
   color: var(--text-color-primary);
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
-  
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }

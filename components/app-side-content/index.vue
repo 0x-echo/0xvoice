@@ -51,7 +51,13 @@ const footerLinks = [{
 <style lang="scss">
 .app-side-content {
   width: 350px;
-  padding: 32px 0;
+  height: 100vh;
+  padding: 32px 0 32px 32px;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
   
   &__footer {
     margin-top: 32px;

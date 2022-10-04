@@ -2,30 +2,33 @@
   <div
     class="app-main-content">
     <div
-      class="app-main-content__header"
-      v-if="title">
-      <i
-        class="ri-arrow-left-line app-main-content__back-icon"
-        v-if="hasBack">
-      </i>
+      class="app-main-content__wrapper">
+      <div
+        class="app-main-content__header"
+        v-if="title">
+        <i
+          class="ri-arrow-left-line app-main-content__back-icon"
+          v-if="hasBack">
+        </i>
+        
+        <h2
+          class="app-main-content__title">
+          {{ title }}
+        </h2>
+      </div>
       
-      <h2
-        class="app-main-content__title">
-        {{ title }}
-      </h2>
+      <slot
+        name="top">
+      </slot>
+      
+      <slot>
+        <post-item
+          v-for="item in posts"
+          :key="item.id"
+          :data="item">
+        </post-item>
+      </slot>
     </div>
-    
-    <slot
-      name="top">
-    </slot>
-    
-    <slot>
-      <post-item
-        v-for="item in posts"
-        :key="item.id"
-        :data="item">
-      </post-item>
-    </slot>
   </div>
 </template>
 
@@ -47,7 +50,18 @@ const props = defineProps({
 <style lang="scss">
 .app-main-content {
   flex: 1;
-  padding: 32px;
+  height: 100vh;
+  padding: 32px 0;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  &__wrapper {
+    padding: 32px;
+    background: white;
+  }
   
   &__header {
     display: flex;

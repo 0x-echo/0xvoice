@@ -47,7 +47,6 @@ const props = defineProps({
   align-items: flex-end;
   justify-content: space-between;
   padding: 32px;
-  border-bottom: 1px solid var(--bg-color);
   
   &__content {
     flex: 1;

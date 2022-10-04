@@ -103,6 +103,7 @@ watch(() => props.active, (val, oldVal) => {
     
     &:hover {
       background: var(--bg-color);  
+      color: var(--text-color-primary);
     }
     
     &.active {

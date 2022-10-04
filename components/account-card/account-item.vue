@@ -6,6 +6,7 @@
       class="account-item__avatar"
       :alt="data.screen_name"
       :hash="data.address"
+      size="small"
       :src="data.avatar || ''">
     </v-avatar>
     
@@ -52,7 +53,7 @@ const props = defineProps({
 
   &__content {
     flex: 1;
-    margin: 0 16px;
+    margin: 0 12px;
   }
   
   &__name {
