@@ -60,6 +60,7 @@ const props = defineProps({
   
   &__wrapper {
     padding: 32px;
+    border-radius: var(--border-radius);
     background: white;
   }
   

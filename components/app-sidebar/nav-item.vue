@@ -1,6 +1,7 @@
 <template>
   <router-link
     class="nav-item"
+    active-class="active"
     :to="url">
     <i
       class="nav-item__icon"
@@ -38,9 +39,8 @@ const props = defineProps({
   color: var(--text-color-secondary);
   transition: all .3s ease;
   
-  &:hover,
   &.active {
-    background: var(--color-primary-lighter);
+    color: var(--color-primary);
   }
   
   & + & {

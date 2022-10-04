@@ -120,13 +120,8 @@ const onClickRepost = () => {
   
   &.is-border {
     padding: 24px;
-    border: 1px solid var(--bg-color);
-    border-radius: var(--border-radius);
+    border-bottom: 1px solid var(--bg-color);
     transition: all .3s ease;
-    
-    &:hover {
-      border-color: var(--border-color);
-    }
   }
   
   &.is-clickable {

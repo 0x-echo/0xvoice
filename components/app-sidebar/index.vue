@@ -33,28 +33,42 @@
         Connect Wallet
       </el-button>
       
-      <div
-        class="app-sidebar__user">
-        <v-avatar
-          class="app-sidebar__user-avatar"
-          :alt="profile.screen_name"
-          :hash="profile.address"
-          size="small"
-          :src="profile.avatar || ''">
-        </v-avatar>
-        
+      <v-menu-popover
+        :menu="userMenu"
+        placement="top"
+        :width="228"
+        @on-toggle-menu="onToggleUserMenu">
         <div
-          class="app-sidebar__user-content">
+          class="app-sidebar__user"
+          :class="{
+            'active': userMenuActive
+          }">
+          <v-avatar
+            class="app-sidebar__user-avatar"
+            :alt="profile.screen_name"
+            :hash="profile.address"
+            size="small"
+            :src="profile.avatar || ''">
+          </v-avatar>
+          
           <div
-            class="app-sidebar__user-name">
-            {{ profile.screen_name }}
+            class="app-sidebar__user-content">
+            <div
+              class="app-sidebar__user-name">
+              {{ profile.screen_name }}
+            </div>
+            
+            <div
+              class="app-sidebar__user-address">
+              {{ profile.address }}
+            </div>
           </div>
+          
+          <i
+            class="ri-more-fill app-sidebar__user-more">
+          </i>
         </div>
-        
-        <i
-          class="ri-more-fill">
-        </i>
-      </div>
+      </v-menu-popover>
     </div>
   </aside>
 </template>
@@ -87,6 +101,21 @@ const profile = {
   bio: 'hello world',
   address: '0x1234343',
   avatar: 'https://s3.coinmarketcap.com/static/img/portraits/6273a4ca7d1c136ae3842025.png'
+}
+
+const userMenu = [{
+  icon: 'ri-refresh-line',
+  label: 'Refresh profile',
+  value: 'refresh-profile'
+}, {
+  icon: 'ri-logout-circle-r-line',
+  label: 'Logout',
+  value: 'logout'
+}]
+
+let userMenuActive = ref(false)
+const onToggleUserMenu = (value) => {
+  userMenuActive.value = value
 }
 </script>
 
@@ -126,13 +155,54 @@ const profile = {
   }
   
   &__connect-button {
+    position: relative;
     width: 100%;
     font-weight: 600;
+    overflow: hidden;
+    
+    span {
+      transition: all .3s ease;
+    }
+    
+    &::before {
+      content: '\f2ac';
+      position: absolute;
+      left: 0;
+      top: -100%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-family: 'remixicon';
+      font-weight: normal;
+      transition: all .3s ease;
+    }
+    
+    &:hover {
+      span {
+        transform: translateY(300%);
+      }
+      
+      &::before {
+        top: 0;
+      }
+    }
   }
   
   &__user {
     display: flex;
     align-items: center;
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all .3s ease;
+    
+    &:hover,
+    &.active {
+      background: white;
+    }
   }
   
   &__user-content {
@@ -142,6 +212,17 @@ const profile = {
   
   &__user-name {
     font-size: 14px;
+    font-weight: 600;
+  }
+  
+  &__user-address {
+    margin-top: 1px;
+    font-size: 12px;
+    color: var(--text-color-muted);
+  }
+  
+  &__user-more {
+    color: var(--text-color-secondary);
   }
 }
 </style>

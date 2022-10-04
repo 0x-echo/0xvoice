@@ -32,12 +32,14 @@ const props = defineProps({
 
 <style lang="scss">
 .account-card {
-  padding: 12px;
+  // padding: 12px;
   border-radius: var(--border-radius);
-  border: 1px solid var(--bg-color);
+  // border: 1px solid var(--border-color);
   
   &__header {
     padding: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
   }
   
   &__title {

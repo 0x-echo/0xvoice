@@ -22,6 +22,10 @@
         class="app-side-content__copyright">
         © 2022 VOICE
       </div>
+      
+      <p>
+        Our voice matters.
+      </p>
     </div>
   </div>
 </template>

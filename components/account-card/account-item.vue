@@ -48,7 +48,7 @@ const props = defineProps({
   transition: all .3s ease;
   
   &:hover {
-    background: var(--bg-color);
+    background: white;
   }
 
   &__content {
