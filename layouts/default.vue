@@ -4,7 +4,13 @@
     <app-sidebar>
     </app-sidebar>
     
-    <slot />
+    <main
+      class="app-main">
+      <slot />
+      
+      <app-side-content>
+      </app-side-content>
+    </main>
   </div>
 </template>
 

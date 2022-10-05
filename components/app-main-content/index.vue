@@ -81,7 +81,7 @@ const props = defineProps({
     height: 32px;
     border-radius: 50%;
     margin-right: 12px;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
     transition: all .3s ease;
     

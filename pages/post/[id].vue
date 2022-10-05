@@ -1,19 +1,13 @@
 <template>
-  <main
-    class="app-main">
-    <app-main-content
-      title="Post">
-      <post-item
-        :border="false"
-        :clickable="false"
-        :data="data"
-        is-full>
-      </post-item>
-    </app-main-content>
-    
-    <app-side-content>
-    </app-side-content>
-  </main>
+  <app-main-content
+    title="Post">
+    <post-item
+      :border="false"
+      :clickable="false"
+      :data="data"
+      is-full>
+    </post-item>
+  </app-main-content>
 </template>
 
 <script setup>

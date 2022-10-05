@@ -116,9 +116,11 @@ const onClickRepost = () => {
 <style lang="scss">
 .post-item {
   line-height: 1.625;
+  padding: 24px 0 32px;
   
   &.is-border {
-    padding: 24px 24px 32px;
+    padding-left: 24px;
+    padding-right: 24px;
     transition: all .3s ease;
     
     & + & {

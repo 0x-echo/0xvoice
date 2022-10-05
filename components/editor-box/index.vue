@@ -18,7 +18,7 @@
         ref="editorInput"
         v-model="content"
         :autosize="{
-          minRows: 3
+          minRows: 4
         }"
         :placeholder="placeholder"
         resize="none"
@@ -134,6 +134,7 @@ const enter = () => {
   
   &__send-button {
     width: 120px;
+    font-weight: 600;
   }
 }
 </style>

@@ -1,20 +1,14 @@
 <template>
-  <main
-    class="app-main">
-    <app-main-content
-      :posts="posts"
-      :title="profile.screen_name">
-      <template
-        #top>
-        <profile-box
-          :data="profile">
-        </profile-box>
-      </template>
-    </app-main-content>
-    
-    <app-side-content>
-    </app-side-content>
-  </main>
+  <app-main-content
+    :posts="posts"
+    :title="profile.screen_name">
+    <template
+      #top>
+      <profile-box
+        :data="profile">
+      </profile-box>
+    </template>
+  </app-main-content>
 </template>
 
 <script setup>

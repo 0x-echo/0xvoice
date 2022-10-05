@@ -1,19 +1,13 @@
 <template>
-  <main
-    class="app-main">
-    <app-main-content
-      :posts="posts"
-      title="Home">
-      <template
-        #top>
-        <editor-box>
-        </editor-box>
-      </template>
-    </app-main-content>
-    
-    <app-side-content>
-    </app-side-content>
-  </main>
+  <app-main-content
+    :posts="posts"
+    title="Home">
+    <template
+      #top>
+      <editor-box>
+      </editor-box>
+    </template>
+  </app-main-content>
 </template>
 
 <script setup>
