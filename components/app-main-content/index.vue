@@ -6,10 +6,12 @@
       <div
         class="app-main-content__header"
         v-if="title">
-        <i
-          class="ri-arrow-left-line app-main-content__back-icon"
-          v-if="hasBack">
-        </i>
+        <div
+          class="app-main-content__back-icon">
+          <i
+            class="ri-arrow-left-line">
+          </i>
+        </div>
         
         <h2
           class="app-main-content__title">
@@ -59,6 +61,7 @@ const props = defineProps({
   }
   
   &__wrapper {
+    min-height: calc(100vh - 64px);
     padding: 32px;
     border-radius: var(--border-radius);
     background: white;
@@ -67,7 +70,29 @@ const props = defineProps({
   &__header {
     display: flex;
     align-items: center;
-    padding-bottom: 32px;
+    padding-bottom: 24px;
+  }
+  
+  &__back-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .3s ease;
+    
+    &:hover {
+      background: var(--bg-color);
+    }
+  }
+  
+  &__title {
+    font-size: 22px;
+    font-weight: 600;
   }
 }
 </style>

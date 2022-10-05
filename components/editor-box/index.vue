@@ -86,7 +86,8 @@ const enter = () => {
 <style lang="scss">
 .editor-box {
   display: flex;
-  padding: 0 24px 24px;
+  padding: 24px 24px 32px;
+  border-bottom: 1px solid var(--bg-color);
   
   &__left {
     flex-shrink: 0;

@@ -40,6 +40,7 @@ const props = defineProps({
   transition: all .3s ease;
   
   &.active {
+    background: #edeff7;
     color: var(--color-primary);
   }
   

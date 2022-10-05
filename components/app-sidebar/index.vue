@@ -134,7 +134,7 @@ const onToggleUserMenu = (value) => {
   }
   
   &__header {
-    margin-bottom: 32px;
+    margin-bottom: 65px;
   }
   
   &__logo {

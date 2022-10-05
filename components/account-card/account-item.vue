@@ -21,6 +21,9 @@
     
     <el-button
       class="account-item__follow-button"
+      :class="{
+        'is-unfollow': !data.is_following
+      }"
       @click.stop>
       {{ data.is_following ? 'Following' : 'Follow' }}
     </el-button>
@@ -65,9 +68,16 @@ const props = defineProps({
   &__follow-button {
     &,
     &:focus:not(.el-button:hover) {
-      border-color: var(--color-primary);
       background: transparent;
-      color: var(--color-primary);
+    }
+    
+    &.is-unfollow {
+      &,
+      &:focus:not(.el-button:hover) {
+        border-color: var(--color-primary);
+        background: transparent;
+        color: var(--color-primary);
+      }
     }
     
     &:hover,

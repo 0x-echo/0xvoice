@@ -115,13 +115,15 @@ const onClickRepost = () => {
 
 <style lang="scss">
 .post-item {
-  margin-bottom: 24px;
   line-height: 1.625;
   
   &.is-border {
-    padding: 24px;
-    border-bottom: 1px solid var(--bg-color);
+    padding: 24px 24px 32px;
     transition: all .3s ease;
+    
+    & + & {
+      border-top: 1px solid var(--bg-color);
+    }
   }
   
   &.is-clickable {
