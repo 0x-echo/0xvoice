@@ -86,13 +86,9 @@ const nav = [{
   label: 'Explore',
   url: '/explore'
 }, {
-  icon: 'ri-home-2-line',
+  icon: 'ri-user-line',
   label: 'Profile',
   url: '/profile'
-}, {
-  icon: 'ri-settings-2-line',
-  label: 'Settings',
-  url: '/settings'
 }]
 
 const profile = {
@@ -201,7 +197,7 @@ const onToggleUserMenu = (value) => {
     
     &:hover,
     &.active {
-      background: white;
+      background: #edeff7;
     }
   }
   

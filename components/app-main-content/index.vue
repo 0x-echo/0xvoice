@@ -7,7 +7,9 @@
         class="app-main-content__header"
         v-if="title">
         <div
-          class="app-main-content__back-icon">
+          class="app-main-content__back-icon"
+          v-if="hasBack"
+          @click="$router.back()">
           <i
             class="ri-arrow-left-line">
           </i>

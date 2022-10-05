@@ -1,5 +1,6 @@
 <template>
   <app-main-content
+    has-back
     title="Post">
     <post-item
       :border="false"
