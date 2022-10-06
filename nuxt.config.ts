@@ -1,6 +1,7 @@
 
 import NodeGlobalsPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill'
 import commonjs from '@rollup/plugin-commonjs'
+import inject from '@rollup/plugin-inject'
 
 export default defineNuxtConfig({
   meta: {
@@ -37,6 +38,9 @@ export default defineNuxtConfig({
       href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
     }]
   },
+  buildModules: [
+    '@pinia/nuxt',
+  ],
   css: [
     'remixicon/fonts/remixicon.css',
     'element-plus/dist/index.css',
@@ -45,28 +49,35 @@ export default defineNuxtConfig({
     '@/styles/themes/_default.scss'
   ],
   vite: {
-    // plugins: [
-    //   // commonjs()
-    // ],
-    // optimizeDeps: {
-    //   esbuildOptions: {
-    //     // Fix global is not defined error
-    //     define: {
-    //       global: 'globalThis'
-    //     },
-    //     plugins: [
-    //       // Without this, npm run dev will output Buffer or process is not defined error
-    //       NodeGlobalsPolyfillPlugin({
-    //         buffer: true
-    //       })
-    //     ]
-    //   }
-    // },
-    // build: {
-    //   commonjsOptions: {
-    //     transformMixedEsModules: false
-    //   }
-    // },
+    // plugins: [eslintPlugin()],
+    plugins: [
+      //polyfillExports(),
+      commonjs(),
+      // inject({ Buffer: ['buffer', 'Buffer'] })
+    ],
+    optimizeDeps: {
+      esbuildOptions: {
+        // Fix global is not defined error
+        define: {
+          global: 'globalThis'
+        },
+        plugins: [
+          // Without this, npm run dev will output Buffer or process is not defined error
+          NodeGlobalsPolyfillPlugin({
+            buffer: true
+          })
+        ]
+      }
+    },
+    build: {
+      rollupOptions: {
+        // plugins: [nodePolyfills()],
+        // output: { format: 'cjs' }
+      },
+      commonjsOptions: {
+        transformMixedEsModules: false
+      }
+    },
     css: {
       preprocessorOptions: {
         scss: {

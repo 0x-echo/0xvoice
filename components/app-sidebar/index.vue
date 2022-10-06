@@ -29,7 +29,8 @@
       <el-button
         class="app-sidebar__connect-button"
         size="large"
-        type="primary">
+        type="primary"
+        @click="connectDialogVisible = true">
         Connect Wallet
       </el-button>
       
@@ -70,6 +71,10 @@
         </div>
       </v-menu-popover>
     </div>
+    
+    <dialog-connect
+      v-model="connectDialogVisible">
+    </dialog-connect>
   </aside>
 </template>
 
@@ -91,6 +96,9 @@ const nav = [{
   url: '/profile'
 }]
 
+let connectDialogVisible = ref(false)
+
+// user 
 const profile = {
   id: 'hello',
   screen_name: '0xJoanne',
@@ -130,7 +138,8 @@ const onToggleUserMenu = (value) => {
   }
   
   &__header {
-    margin-bottom: 65px;
+    padding-top: 24px;
+    margin-bottom: 41px;
   }
   
   &__logo {

@@ -1,7 +1,6 @@
 <template>
   <app-main-content
-    :posts="posts"
-    :title="profile.screen_name">
+    :posts="posts">
     <template
       #top>
       <profile-box
