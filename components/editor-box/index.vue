@@ -42,7 +42,8 @@
           <div
             class="editor-box__action"
             role="button"
-            title="Copyright">
+            title="Copyright"
+            @click="copyrightDialogVisible = true">
             <i
               class="ri-copyright-line">
             </i>
@@ -57,6 +58,10 @@
         </el-button>
       </div>
     </div>
+    
+    <dialog-copyright
+      v-model="copyrightDialogVisible">
+    </dialog-copyright>
   </div>
 </template>
 
@@ -77,6 +82,8 @@ const store = {
 }
 
 const content = ref('')
+
+let copyrightDialogVisible = ref(false)
 
 const enter = () => {
   
