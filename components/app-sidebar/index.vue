@@ -31,7 +31,7 @@
         class="app-sidebar__connect-button"
         size="large"
         type="primary"
-        @click="$emit('open-connect-wallet-dialog')">
+        @click="$bus.emit('show-connect-wallet-dialog')">
         Connect Wallet
       </el-button>
       
@@ -84,10 +84,6 @@ import { ElButton } from 'element-plus'
 import useStore from '~~/store'
 
 const store = useStore()
-
-const emits = defineEmits([
-  'open-connect-wallet-dialog'
-])
 
 const nav = [{
   icon: 'ri-home-2-line',

@@ -23,7 +23,7 @@
         :placeholder="placeholder"
         resize="none"
         type="textarea"
-        @keydown.enter="enter">
+        @keydown.enter="submit">
       </el-input>
       
       <div
@@ -53,7 +53,8 @@
         <el-button
           class="editor-box__send-button"
           size="large"
-          type="primary">
+          type="primary"
+          @click="submit">
           POST
         </el-button>
       </div>
@@ -67,6 +68,7 @@
 
 <script setup>
 import { ElButton, ElInput } from 'element-plus'
+const { $bus } = useNuxtApp()
 
 const props = defineProps({
   placeholder: {
@@ -85,8 +87,8 @@ const content = ref('')
 
 let copyrightDialogVisible = ref(false)
 
-const enter = () => {
-  
+const submit = () => {
+  $bus.emit('show-connect-wallet-dialog')
 }
 </script>
 

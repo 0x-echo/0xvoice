@@ -2,7 +2,7 @@
   <div
     class="app">
     <app-sidebar
-      @open-connect-wallet-dialog="connectDialogVisible = true">
+      @show-connect-wallet-dialog="connectDialogVisible = true">
     </app-sidebar>
     
     <main
@@ -48,6 +48,9 @@ const getAuthMessage = (chain, address) => {
 }
 
 let connectDialogVisible = ref(false)
+$bus.on('show-connect-wallet-dialog', () => {
+  connectDialogVisible.value = true
+})
 
 let provider = null
 let web3provider = null
