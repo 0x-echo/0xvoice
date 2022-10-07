@@ -80,7 +80,7 @@
 
 <script setup>
 import NavItem from './nav-item'
-import { ElButton } from 'element-plus'
+import { ElButton, ElMessage } from 'element-plus'
 import useStore from '~~/store'
 
 const store = useStore()
@@ -128,7 +128,10 @@ const refreshProfile = async () => {
 }
 
 const logout = (silent = false) => {
-  store.setLogined(false)
+  store.setData('auth', {
+    hasLogined: false,
+    token: ''
+  })
   store.setLoginInfo({
     chain: '',
     address: '',
