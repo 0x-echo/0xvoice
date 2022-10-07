@@ -27,6 +27,7 @@
     <div
       class="app-sidebar__footer">
       <el-button
+        v-if="!store.auth.hasLogined"
         class="app-sidebar__connect-button"
         size="large"
         type="primary"
@@ -35,6 +36,7 @@
       </el-button>
       
       <v-menu-popover
+      v-if="store.auth.hasLogined"
         :menu="userMenu"
         placement="top"
         :width="228"
@@ -48,22 +50,22 @@
           }">
           <v-avatar
             class="app-sidebar__user-avatar"
-            :alt="profile.screen_name"
-            :hash="profile.address"
+            :alt="store.profile.screen_name"
+            :hash="store.profile.address"
             size="small"
-            :src="profile.avatar || ''">
+            :src="store.profile.avatar || ''">
           </v-avatar>
           
           <div
             class="app-sidebar__user-content">
             <div
               class="app-sidebar__user-name">
-              {{ profile.screen_name }}
+              {{ $ellipsisInMiddle(store.profile.screen_name) }}
             </div>
             
             <div
               class="app-sidebar__user-address">
-              {{ profile.address }}
+              {{ $ellipsisInMiddle(store.profile.address) }}
             </div>
           </div>
           
@@ -100,15 +102,6 @@ const nav = [{
   label: 'Profile',
   url: '/profile'
 }]
-
-// user 
-const profile = {
-  id: 'hello',
-  screen_name: '0xJoanne',
-  bio: 'hello world',
-  address: '0x1234343',
-  avatar: 'https://s3.coinmarketcap.com/static/img/portraits/6273a4ca7d1c136ae3842025.png'
-}
 
 const userMenu = [{
   icon: 'ri-refresh-line',

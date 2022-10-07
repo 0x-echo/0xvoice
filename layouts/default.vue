@@ -22,10 +22,30 @@
 
 <script setup>
 import { providers, ethers } from "ethers"
-const { $bus, $showLoading } = useNuxtApp()
 import useStore from '~~/store'
+import commonConfig from '../config'
+import useSign from '~~/compositions/sign'
+import useAuth from '~~/compositions/auth'
+import { ElMessage } from 'element-plus'
+import { API } from '../libs/api'
 
+const { $bus, $showLoading } = useNuxtApp()
 const store = useStore()
+const sign = useSign()
+const { getCommonHeader, tryAutoLogin } = useAuth(store)
+
+tryAutoLogin()
+
+const getAuthMessage = (chain, address) => {
+  const signKeys = sign.generateKeyPair()
+  return {
+    message: commonConfig.wallet.auth_message
+    .replace('ADDRESS', `${chain}/${address}`)
+    .replace('TIMESTAMP', new Date().getTime())
+    .replace('PUBLIC_KEY', signKeys.publicKey.replace(/^0x/, '')),
+    signKeys
+  }
+}
 
 let connectDialogVisible = ref(false)
 
@@ -118,16 +138,16 @@ const login = async () => {
     return
   }
   
-  if (!commonConfig.supportedNetworks[`EVM/${network}`]) {
-    // if mumbai is supported
-    if (network.toString() === '80001' && store.widgetConfig.support_mumbai) {
-    } else {
-      ElMessage.error({
-        message: `Sorry. The network is not supported. Current supported networks are: ${Object.values(commonConfig.supportedNetworks).join(', ')}.`
-      })
-      return
-    }
-  }
+  // if (!commonConfig.supportedNetworks[`EVM/${network}`]) {
+  //   // if mumbai is supported
+  //   if (network.toString() === '80001' && store.widgetConfig.support_mumbai) {
+  //   } else {
+  //     ElMessage.error({
+  //       message: `Sorry. The network is not supported. Current supported networks are: ${Object.values(commonConfig.supportedNetworks).join(', ')}.`
+  //     })
+  //     return
+  //   }
+  // }
 
   try {
     let account
@@ -159,7 +179,7 @@ const requestLogin = async (account, message, signature, chain, signKeys) => {
   const loadingMessage = $showLoading()
   
   try {
-      const { data: rs } = await $fetch(commonConfig.api().CREATE_USER, {
+      const { data: rs } = await $fetch(API.CREATE_USER, {
         method: 'POST',
         body: {
           chain,
@@ -175,7 +195,11 @@ const requestLogin = async (account, message, signature, chain, signKeys) => {
 
       sign.save(signKeys.privateKey)
 
-      store.setLogined(true)
+      store.setData('auth', {
+        hasLogined: true,
+        token: rs.token
+      })
+
       store.setLoginInfo({
         chain: rs.chain,
         address: rs.address,
@@ -186,23 +210,17 @@ const requestLogin = async (account, message, signature, chain, signKeys) => {
         dotbit: rs.dotbit
       })
 
-      await store.updateBalance(account)
-
       loadingMessage.close()
 
       ElMessage.success({
         message: 'Sign in successfully!'
       })
 
-      loginOnCurrentPage = true
-
       if (provider) {
         try {
           await provider.disconnect()
         } catch (e) {}
       }
-
-      await getSummary()
 
       // should not be too fast, so user can see it happen.
       setTimeout(async () => {
@@ -213,9 +231,6 @@ const requestLogin = async (account, message, signature, chain, signKeys) => {
         await store.getScreenName(true)
       }, 10)
 
-      setTimeout(async () => {
-        await store.syncBalance()
-      }, 20)
     } catch (e) {
       console.log(e)
       loadingMessage.close()
