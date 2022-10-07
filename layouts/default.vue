@@ -225,11 +225,6 @@ const requestLogin = async (account, message, signature, chain, signKeys) => {
         } catch (e) {}
       }
 
-      // should not be too fast, so user can see it happen.
-      setTimeout(async () => {
-        await afterLogin()
-      }, 800)
-
       setTimeout(async () => {
         await store.getScreenName(true)
       }, 10)

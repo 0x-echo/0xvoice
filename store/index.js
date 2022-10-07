@@ -1,6 +1,7 @@
 // @important All new keys must be UpperCase
 
 import { defineStore } from 'pinia'
+import { API } from '../libs/api'
 
 const useStore = defineStore('global', {
 	state: () => ({
@@ -25,7 +26,6 @@ const useStore = defineStore('global', {
   }),
 	actions: {
     setData (module, data) {
-      console.log('set data', module, data)
       if (!module) {
         return
       }
@@ -56,14 +56,14 @@ const useStore = defineStore('global', {
       }
     },
     async getScreenName (force) {
-      if (!this.chain || !this.address) {
+      if (!this.profile.chain || !this.profile.address) {
         console.error('user: fail to get screen name')
         return
       }
       try {
-        const { data: rs } = await $fetch(config.api().GET_USER_INFO, {
+        const { data: rs } = await $fetch(API.GET_USER_INFO, {
           params: {
-            address: this.chain + '/' + this.address,
+            address: this.profile.chain + '/' + this.profile.address,
             force: force ? 'true' : ''
           }
         })
@@ -71,10 +71,10 @@ const useStore = defineStore('global', {
           return
         }
         if (rs.dotbit || rs.ens) {
-          this.screen_name = rs.dotbit || rs.ens
+          this.profile.screen_name = rs.dotbit || rs.ens
         }
         if (rs.avatar) {
-          this.avatar = rs.avatar
+          this.profile.avatar = rs.avatar
         }
 
         // logout user if JWT expires
