@@ -5,7 +5,7 @@
       class="app-sidebar__header">
       <router-link
         class="app-sidebar__logo"
-        to="/home">
+        to="/">
         <img 
           class="app-sidebar__logo-image"
           src="@/assets/logo.svg" 
@@ -36,7 +36,7 @@
       </el-button>
       
       <v-menu-popover
-      v-if="store.auth.hasLogined"
+        v-if="store.auth.hasLogined"
         :menu="userMenu"
         placement="top"
         :width="228"
@@ -88,7 +88,7 @@ const store = useStore()
 const nav = [{
   icon: 'ri-home-2-line',
   label: 'Home',
-  url: '/home'
+  url: '/'
 }, {
   icon: 'ri-signal-tower-line',
   label: 'Explore',

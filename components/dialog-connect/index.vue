@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    class="dialog-connect"
     title="Connect Wallet"
     title-icon="ri-wallet-3-line">
     <div
