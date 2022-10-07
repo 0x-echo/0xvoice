@@ -30,7 +30,7 @@
         class="app-sidebar__connect-button"
         size="large"
         type="primary"
-        @click="connectDialogVisible = true">
+        @click="$emit('open-connect-wallet-dialog')">
         Connect Wallet
       </el-button>
       
@@ -38,7 +38,9 @@
         :menu="userMenu"
         placement="top"
         :width="228"
-        @on-toggle-menu="onToggleUserMenu">
+        @logout="logout"
+        @on-toggle-menu="onToggleUserMenu"
+        @refresh-profile="refreshProfile">
         <div
           class="app-sidebar__user"
           :class="{
@@ -71,16 +73,19 @@
         </div>
       </v-menu-popover>
     </div>
-    
-    <dialog-connect
-      v-model="connectDialogVisible">
-    </dialog-connect>
   </aside>
 </template>
 
 <script setup>
 import NavItem from './nav-item'
 import { ElButton } from 'element-plus'
+import useStore from '~~/store'
+
+const store = useStore()
+
+const emits = defineEmits([
+  'open-connect-wallet-dialog'
+])
 
 const nav = [{
   icon: 'ri-home-2-line',
@@ -95,8 +100,6 @@ const nav = [{
   label: 'Profile',
   url: '/profile'
 }]
-
-let connectDialogVisible = ref(false)
 
 // user 
 const profile = {
@@ -120,6 +123,36 @@ const userMenu = [{
 let userMenuActive = ref(false)
 const onToggleUserMenu = (value) => {
   userMenuActive.value = value
+}
+
+const refreshProfile = async () => {
+  const loadingMessage = $showLoading()
+  
+  try {
+    await store.getScreenName(true)
+    ElMessage.success({
+      message: 'Refreshing done!'
+    })
+  } finally {
+    loadingMessage.close()
+  }
+}
+
+const logout = (silent = false) => {
+  store.setLogined(false)
+  store.setLoginInfo({
+    chain: '',
+    address: '',
+    screen_name: '',
+    avatar: '',
+    balance: ''
+  })
+  localStorage.removeItem('login_info')
+  if (!silent) {
+    ElMessage.success({
+      message: 'Logout successfully!'
+    })
+  } 
 }
 </script>
 

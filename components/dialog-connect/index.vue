@@ -75,14 +75,14 @@ const list = computed(() => {
   // }
   ]
 
-  if (store.wallet.loginType === 'login') {
-    list.push({
-      label: 'Phantom',
-      icon: iconPhantom,
-      value: 'phantom',
-      disabled: !window.solana
-    })
-  }
+  // if (store.wallet.loginType === 'login') {
+  //   list.push({
+  //     label: 'Phantom',
+  //     icon: iconPhantom,
+  //     value: 'phantom',
+  //     disabled: !window.solana
+  //   })
+  // }
 
   return list
 })
