@@ -5,14 +5,27 @@ import { defineStore } from 'pinia'
 const useStore = defineStore('global', {
 	state: () => ({
     wallet: {
-      loginType: 'login', // or tip
+      loginType: 'login',
       loginApp: 'metamask', // or walletconnect
       connectedAccounts: [],
       tipWallet: ''
+    },
+    auth: {
+      token: '',
+      hasLogined: false
+    },
+    profile: {
+      nickname: '',
+      address: '',
+      chain: '',
+      avatar: '',
+      ens: '',
+      dotbit: ''
     }
   }),
 	actions: {
     setData (module, data) {
+      console.log('set data', module, data)
       if (!module) {
         return
       }
@@ -28,8 +41,9 @@ const useStore = defineStore('global', {
     },
     setLoginInfo (val) {
       for (let i in val) {
-        this[i] = val[i]
+        this['profile'][i] = val[i]
       }
+
       try {
         if (val.address) {
           localStorage.setItem('login_info', JSON.stringify(val))

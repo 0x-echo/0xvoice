@@ -4,7 +4,8 @@
     title="Home">
     <template
       #top>
-      <editor-box>
+      <editor-box
+        placeholder="Anything to voice?">
       </editor-box>
     </template>
   </app-main-content>
