@@ -70,7 +70,6 @@
 import PostItemContent from './post-item-content'
 import PostItemToolbar from './post-item-toolbar'
 import { ElButton } from 'element-plus'
-import { Timeago } from 'vue2-timeago'
 
 const router = useRouter()
 

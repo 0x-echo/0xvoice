@@ -236,9 +236,24 @@ const submit = () => {
   
   emits('update:modelValue', false)
 } 
+const map = {
+  cc0: [1, 1, 1],
+  forbid: [2, 1, 1],
+  'cc-by': [3, 1, 1],
+  'cc-by-nc': [3, 1, 2],
+  'cc-by-nd': [3, 2, 1],
+  'cc-by-nc-nd': [3, 2, 2],
+  'cc-by-sa': [3, 3, 1],
+  'cc-by-nc-sa': [3, 3, 2]
+}
 
 const onOpenDialog = () => {
-  console.log(store.editor.copyright)
+  const val = map[store.editor.copyright]
+    Object.assign(form, {
+    cc: val[0],
+    adapt: val[1],
+    commercial: val[2]
+  })
 }
 </script>
 
