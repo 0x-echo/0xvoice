@@ -121,10 +121,11 @@ const onClickRepost = () => {
   &.is-border {
     padding-left: 24px;
     padding-right: 24px;
+    border-bottom: 1px solid var(--bg-color);
     transition: all .3s ease;
     
-    & + & {
-      border-top: 1px solid var(--bg-color);
+    &:last-of-type {
+      border-bottom: 0;
     }
   }
   
