@@ -32,10 +32,9 @@
         <span
           class="post-item-content__date"
           v-if="!isFull">
-          {{ data.posted_at }}
-          <!-- <timeago 
+          <timeago 
             :datetime="data.posted_at" 
-            :title="$formatDate(data.posted_at)" /> -->
+            :title="$formatDate(data.created_at)" />
         </span>
       </div>
       
@@ -144,6 +143,7 @@
 <script setup>
 import { ElButton, ElImage, ElPopover } from 'element-plus'
 import { parseContent } from '../../libs/content-parser'
+import { Timeago } from 'vue2-timeago'
 
 const props = defineProps({
   data: {
