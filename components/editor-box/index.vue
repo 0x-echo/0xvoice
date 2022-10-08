@@ -57,7 +57,7 @@
           :loading="loading"
           @keydown.enter="enter"
           @click="submit">
-          POST
+          send
         </el-button>
       </div>
     </div>
@@ -145,7 +145,11 @@ const submit = async () => {
     ElMessage.success('voiced!')
     content.value = ''
   } catch (e) {
-    ElMessage.error(e.message)
+    if (e.response._data && e.response._data.msg) {
+      ElMessage.error(e.response._data.msg)
+    } else {
+      ElMessage.error(e.message)
+    }
   } finally {
     loading.value = false
   }
