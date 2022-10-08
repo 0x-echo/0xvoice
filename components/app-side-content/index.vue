@@ -36,11 +36,18 @@
 
 <script setup>
 import { API } from '~~/libs/api'
+import useAuth from '~~/compositions/auth'
+import useStore from '~~/store'
+
+const store = useStore()
+const auth = useAuth(store)
 
 let accounts = reactive([])
 
 onMounted(async () => {
-  const data = await $fetch(API.GET_USERS)
+  const data = await $fetch(API.GET_USERS, {
+    headers: auth.getCommonHeader()
+  })
   console.log(data)
   for (const one of data.data.list) {
     accounts.push(one)
