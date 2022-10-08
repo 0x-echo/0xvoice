@@ -6,10 +6,14 @@
 </template>
 
 <script setup>
-  import { API } from '~~/libs/api'
+import { API } from '~~/libs/api'
 import useList from '~~/compositions/list'
+import useAuth from '~~/compositions/auth'
+import useStore from '~~/store'
 
+const store = useStore()
 const { $bus } = useNuxtApp()
+const auth = useAuth(store)
 
 let posts = reactive([])
 let loading = ref(false)
@@ -21,7 +25,8 @@ const { fetch, handleScroll, _onMounted, _onBeforeUnmount } = useList({
   loading,
   page,
   done,
-  type: ''
+  type: '',
+  auth
 })
 
 onMounted(_onMounted)

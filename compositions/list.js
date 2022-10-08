@@ -1,6 +1,7 @@
 import { API } from '~~/libs/api'
+import auth from './auth'
 
-export default ({ page, loading, posts, done, type }) => {
+export default ({ page, loading, posts, done, type, auth }) => {
   const fetch = async () => {
     loading.value = true
     try {
@@ -8,7 +9,8 @@ export default ({ page, loading, posts, done, type }) => {
         params: {
           page: page.value,
           type
-        }
+        },
+        headers: auth.getCommonHeader()
       })
   
       if (!data.data.list.length) {
@@ -19,7 +21,7 @@ export default ({ page, loading, posts, done, type }) => {
         })
       }
     } catch (e) {
-  
+      console.log('list:', e)
     } finally {
       loading.value = false
     }
