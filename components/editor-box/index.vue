@@ -57,7 +57,7 @@
           :loading="loading"
           @keydown.enter="enter"
           @click="submit">
-          POST
+          {{ buttonText }}
         </el-button>
       </div>
     </div>
@@ -92,6 +92,9 @@ const props = defineProps({
 
 const content = ref('')
 const loading = ref(false)
+const buttonText = computed(() => {
+  return loading.value ? 'voicing' : 'voice'
+})
 
 watch(content, val => {
   localStorage.setItem('draft', content.value)
@@ -142,10 +145,14 @@ const submit = async () => {
   try {
     const rs = await $fetch(API.CREATE_POST, params)
     $bus.emit('post.create', rs.data.post)
-    ElMessage.success('Voice voiced!')
+    ElMessage.success('voiced!')
     content.value = ''
   } catch (e) {
-    ElMessage.error(e.message)
+    if (e.response._data && e.response._data.msg) {
+      ElMessage.error(e.response._data.msg)
+    } else {
+      ElMessage.error(e.message)
+    }
   } finally {
     loading.value = false
   }
