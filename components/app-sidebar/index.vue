@@ -82,6 +82,7 @@
 import NavItem from './nav-item'
 import { ElButton, ElMessage } from 'element-plus'
 import useStore from '~~/store'
+const { $showLoading } = useNuxtApp()
 
 const store = useStore()
 
