@@ -27,25 +27,40 @@
     </div>
     
     <div
-      class="post-item-toolbar__copyright-list">
+      class="post-item-toolbar__copyright-list"
+      v-if="data.copyright === 'forbid'">
       <el-tooltip
         popper-class="post-item-toolbar__copyright-tooltip"
-        v-for="item in copyrights"
-        :key="item.value"
-        :content="item.desc"
+        :key="copyright.value"
+        :content="copyright.desc"
         placement="top">
         <i
           class="post-item-toolbar__copyright-icon"
-          :class="item.icon">
+          :class="copyright.icons[0]">
         </i>
       </el-tooltip>
     </div>
+    
+    <a
+      class="post-item-toolbar__copyright-list"
+      v-else
+      :href="copyright.link"
+      target="_blank"
+      :title="copyright.label">
+      <i
+        class="post-item-toolbar__copyright-icon"
+        :class="item"
+        v-for="item in copyright.icons"
+        :key="item">
+      </i>
+    </a>
   </div>
 </template>
 
 <script setup>
 import PostItemAction from './post-item-action'
 import { ElTooltip } from 'element-plus'
+import { copyrights } from '~~/config'
 
 const props = defineProps({
   data: {
@@ -69,35 +84,9 @@ const actions = [{
   value: 'repost'
 }]
 
-const copyrights = [{
-  desc: 'Creative Commons License',
-  icon: 'ri-creative-commons-line',
-  value: 'cc'
-}, {
-  desc: 'Credit must be given to the creator.',
-  icon: 'ri-creative-commons-by-line',
-  value: 'by'
-}, {
-  desc: 'Only noncommercial uses of the work are permitted.',
-  icon: 'ri-creative-commons-nc-line',
-  value: 'nc'
-}, {
-  desc: 'No derivatives or adaptations of the work are permitted.',
-  icon: 'ri-creative-commons-nd-line',
-  value: 'nd'
-}, {
-  desc: 'Adaptations must be shared under the same terms.',
-  icon: 'ri-creative-commons-sa-line',
-  value: 'sa'
-}, {
-  desc: 'CC0 allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.',
-  icon: 'ri-creative-commons-zero-line',
-  value: 'zero'
-}, {
-  desc: 'Distribute, remix, adapt, and build upon the material are not allowed.',
-  icon: 'ri-forbid-line',
-  value: 'forbid'
-}]
+const copyright = computed(() => {
+  return copyrights.filter(item => { return item.value === props.data.copyright })[0]
+}) 
 </script>
 
 <style lang="scss">
