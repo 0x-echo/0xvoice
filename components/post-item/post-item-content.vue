@@ -26,7 +26,7 @@
           class="post-item-content__byline"
           :to="`/${data.author.screen_name}`"
           @click.stop>
-          {{ data.author.screen_name }}
+          {{ $ellipsisInMiddle(data.author.screen_name) }}
         </router-link>
         
         <span

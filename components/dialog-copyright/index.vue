@@ -5,6 +5,7 @@
     has-action-footer
     title="Choose a License"
     title-icon="ri-copyright-line"
+    @open="onOpenDialog"
     @submit="submit">
     <el-form
       class="dialog-copyright__form"
@@ -226,6 +227,10 @@ const submit = () => {
   store.setData('editor', {
     copyright: result.value.value
   })
+} 
+
+const onOpenDialog = () => {
+  console.log('hello')
 }
 </script>
 

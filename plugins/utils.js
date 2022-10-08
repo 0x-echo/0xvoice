@@ -75,7 +75,7 @@ function ellipsisInMiddle (str, length = 4) {
 function showLoading () {
   return ElMessage({
     customClass: 'el-message--no-icon',
-    message: () => h('div', { class: 'chat-loader', style: 'width: 20px; height: 20px;border-color:#4E75F6;'}, ''),
+    message: () => h('div', { class: 'v-loader', style: 'width: 20px; height: 20px;border-color:#4E75F6;'}, ''),
     duration: 0
   })
 }

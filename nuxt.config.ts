@@ -45,7 +45,7 @@ export default defineNuxtConfig({
     'remixicon/fonts/remixicon.css',
     'element-plus/dist/index.css',
     '@/styles/_element-plus.scss',
-    '@/styles/_reset.scss',
+    '@/styles/_base.scss',
     '@/styles/themes/_default.scss'
   ],
   vite: {

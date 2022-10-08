@@ -59,7 +59,7 @@
           <div
             class="app-sidebar__user-content">
             <div
-              class="app-sidebar__user-name">
+              class="app-sidebar__user-name ellipsis">
               {{ $ellipsisInMiddle(store.profile.screen_name) }}
             </div>
             
@@ -236,8 +236,13 @@ const logout = (silent = false) => {
     }
   }
   
+  &__user-avatar {
+    flex-shrink: 0;
+  }
+  
   &__user-content {
     flex: 1;
+    min-width: 0;
     margin: 0 12px;
   }
   
