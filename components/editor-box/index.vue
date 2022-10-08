@@ -142,7 +142,7 @@ const submit = async () => {
   try {
     const rs = await $fetch(API.CREATE_POST, params)
     $bus.emit('post.create', rs.data.post)
-    ElMessage.success('Voice voiced!')
+    ElMessage.success('voiced!')
     content.value = ''
   } catch (e) {
     ElMessage.error(e.message)

@@ -46,7 +46,8 @@ export default defineNuxtConfig({
     'element-plus/dist/index.css',
     '@/styles/_element-plus.scss',
     '@/styles/_base.scss',
-    '@/styles/themes/_default.scss'
+    '@/styles/themes/_default.scss',
+    '@/styles/highlight/github.scss'
   ],
   vite: {
     // plugins: [eslintPlugin()],

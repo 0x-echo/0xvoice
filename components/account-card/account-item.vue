@@ -15,7 +15,7 @@
       <div
         class="account-item__name"
         :to="data.address">
-        {{ data.screen_name }}
+        {{ $formatScreenName(data.screen_name) }}
       </div>
     </div>
     

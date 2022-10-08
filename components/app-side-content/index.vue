@@ -35,37 +35,49 @@
 </template>
 
 <script setup>
-const accounts = [{
-  id: '1',
-  screen_name: 'Airyland',
-  address: '0x12032425',
-  avatar: '',
-  is_following: false
-}, {
-  id: '2',
-  screen_name: 'Joanne',
-  address: '0x12032424',
-  avatar: '',
-  is_following: true
-}, {
-  id: '3',
-  screen_name: 'Airyland',
-  address: '0x12032423',
-  avatar: '',
-  is_following: false
-}, {
-  id: '4',
-  screen_name: 'Joanne',
-  address: '0x12032422',
-  avatar: '',
-  is_following: false
-}, {
-  id: '5',
-  screen_name: 'Joanne',
-  address: '0x12032421',
-  avatar: '',
-  is_following: false
-}]
+import { API } from '~~/libs/api'
+
+let accounts = reactive([])
+
+onMounted(async () => {
+  const data = await $fetch(API.GET_USERS)
+  console.log(data)
+  for (const one of data.data.list) {
+    accounts.push(one)
+  }
+})
+
+// const accounts = [{
+//   id: '1',
+//   screen_name: 'Airyland',
+//   address: '0x12032425',
+//   avatar: '',
+//   is_following: false
+// }, {
+//   id: '2',
+//   screen_name: 'Joanne',
+//   address: '0x12032424',
+//   avatar: '',
+//   is_following: true
+// }, {
+//   id: '3',
+//   screen_name: 'Airyland',
+//   address: '0x12032423',
+//   avatar: '',
+//   is_following: false
+// }, {
+//   id: '4',
+//   screen_name: 'Joanne',
+//   address: '0x12032422',
+//   avatar: '',
+//   is_following: false
+// }, {
+//   id: '5',
+//   screen_name: 'Joanne',
+//   address: '0x12032421',
+//   avatar: '',
+//   is_following: false
+// }]
 
 const footerLinks = [{
   label: 'Terms of Service',
