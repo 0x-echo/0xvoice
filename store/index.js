@@ -22,6 +22,9 @@ const useStore = defineStore('global', {
       avatar: '',
       ens: '',
       dotbit: ''
+    },
+    editor: {
+      copyright: 'cc-by-nc-nd'
     }
   }),
 	actions: {

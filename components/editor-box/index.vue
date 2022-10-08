@@ -120,10 +120,11 @@ const submit = async () => {
     return
   }
   const body = {
+    id: uuidv4(),
     type: 'post',
     content: parseContent(content.value, false),
     protocol_version: '0.1',
-    id: uuidv4()
+    copyright: store.editor.copyright
   }
 
   const signed = sign.sign(body)

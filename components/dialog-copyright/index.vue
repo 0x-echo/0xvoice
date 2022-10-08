@@ -4,7 +4,8 @@
     top="5vh"
     has-action-footer
     title="Choose a License"
-    title-icon="ri-copyright-line">
+    title-icon="ri-copyright-line"
+    @submit="submit">
     <el-form
       class="dialog-copyright__form"
       :model="form"
@@ -60,6 +61,9 @@
 
 <script setup>
 import { ElForm, ElFormItem, ElRadio, ElRadioGroup } from 'element-plus'
+import useStore from '~~/store'
+
+const store = useStore()
 
 let form = reactive({
   cc: 3,
@@ -216,6 +220,12 @@ const getCopyright = (value) => {
   return copyrights.filter(item => {
     return item.value === value
   })[0]
+}
+
+const submit = () => {
+  store.setData('editor', {
+    copyright: result.value.value
+  })
 }
 </script>
 
