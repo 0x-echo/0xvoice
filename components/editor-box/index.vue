@@ -57,7 +57,7 @@
           :loading="loading"
           @keydown.enter="enter"
           @click="submit">
-          send
+          {{ buttonText }}
         </el-button>
       </div>
     </div>
@@ -92,6 +92,9 @@ const props = defineProps({
 
 const content = ref('')
 const loading = ref(false)
+const buttonText = computed(() => {
+  return loading.value ? 'voicing' : 'voice'
+})
 
 watch(content, val => {
   localStorage.setItem('draft', content.value)
