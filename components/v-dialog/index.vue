@@ -27,7 +27,7 @@
           class="v-dialog__close"
           v-if="showClose"
           type="info"
-          @click="close">
+          @click="$emit('on-close')">
           <i
             class="ri-close-line">
           </i>
@@ -43,7 +43,7 @@
       v-if="hasActionFooter">
       <el-button
         v-if="hasCancelButton"
-        @click="close">
+        @click="$emit('cancel')">
         {{ cancelButtonText }}
       </el-button>
       
@@ -107,13 +107,10 @@ const props = defineProps({
 })
 
 const emits = defineEmits([
-  'submit',
-  'update:modelValue'
+  'cancel',
+  'on-close',
+  'submit'
 ])
-
-const close = () => {
-  emits('update:modelValue', false)
-}
 
 const submit = () => {
   emits('submit')

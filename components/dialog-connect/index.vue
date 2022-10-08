@@ -2,7 +2,8 @@
   <v-dialog
     class="dialog-connect"
     title="Connect Wallet"
-    title-icon="ri-wallet-3-line">
+    title-icon="ri-wallet-3-line"
+    @on-close="$emit('update:modelValue', false)">
     <div
       class="dialog-connect__list">
       <wallet-item
@@ -55,7 +56,8 @@ const store = useStore()
 const loading = ref(true)
 
 const emits = defineEmits([
-  'connect-wallet'
+  'connect-wallet',
+  'update:modelValue'
 ])
 
 const list = computed(() => {

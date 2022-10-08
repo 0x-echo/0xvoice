@@ -5,6 +5,8 @@
     has-action-footer
     title="Choose a License"
     title-icon="ri-copyright-line"
+    @cancel="$emit('update:modelValue', false)"
+    @on-close="$emit('update:modelValue', false)"
     @open="onOpenDialog"
     @submit="submit">
     <el-form
@@ -65,6 +67,10 @@ import { ElForm, ElFormItem, ElRadio, ElRadioGroup } from 'element-plus'
 import useStore from '~~/store'
 
 const store = useStore()
+
+const emits = defineEmits([
+  'update:modelValue'
+])
 
 let form = reactive({
   cc: 3,
@@ -227,10 +233,12 @@ const submit = () => {
   store.setData('editor', {
     copyright: result.value.value
   })
+  
+  emits('update:modelValue', false)
 } 
 
 const onOpenDialog = () => {
-  console.log('hello')
+  console.log(store.editor.copyright)
 }
 </script>
 
