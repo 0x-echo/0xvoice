@@ -3,22 +3,22 @@
     class="profile-box">
     <v-avatar
       class="profile-box__avatar"
-      :alt="data.screen_name"
-      :hash="data.address"
+      :alt="store.profile.screen_name"
+      :hash="store.profile.address"
       :size="100"
-      :src="data.avatar || ''">
+      :src="store.profile.avatar || ''">
     </v-avatar>
     
     <div
       class="profile-box__content">
       <div
         class="profile-box__name">
-        {{ data.screen_name }}
+        {{ store.profile.screen_name }}
       </div>
       
       <div
         class="profile-box__bio">
-        {{ data.bio }}
+        {{ store.profile.bio }}
       </div>
     </div>
     
@@ -32,6 +32,9 @@
 
 <script setup>
 import { ElButton } from 'element-plus'
+import useStore from '~~/store'
+
+const store = useStore()
 
 const props = defineProps({
   data: {

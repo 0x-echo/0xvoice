@@ -23,7 +23,7 @@
         :placeholder="placeholder"
         resize="none"
         type="textarea"
-        @keydown.enter="submit">
+        @keydown.enter="enter">
       </el-input>
       
       <div
@@ -54,6 +54,8 @@
           class="editor-box__send-button"
           size="large"
           type="primary"
+          :loading="loading"
+          @keydown.enter="enter"
           @click="submit">
           POST
         </el-button>
@@ -67,11 +69,19 @@
 </template>
 
 <script setup>
-import { ElButton, ElInput } from 'element-plus'
+import { ElButton, ElInput, ElMessage } from 'element-plus'
 import useStore from '~~/store'
+import useSign from '~~/compositions/sign'
+import useAuth from '~~/compositions/auth'
+
+import { v4 as uuidv4 } from 'uuid'
+import { parseContent } from '~~/libs/content-parser'
+import { API } from '~~/libs/api'
 const { $bus, $showLoading } = useNuxtApp()
 
 const store = useStore()
+const sign = useSign()
+const auth = useAuth(store)
 
 const props = defineProps({
   placeholder: {
@@ -80,13 +90,64 @@ const props = defineProps({
   }
 })
 
-
 const content = ref('')
+const loading = ref(false)
+
+watch(content, val => {
+  localStorage.setItem('draft', content.value)
+})
+
+onMounted(() => {
+  try {
+    const val = localStorage.getItem('draft')
+    if (val) {
+      content.value = val
+    }
+  } catch (e) {}
+})
 
 let copyrightDialogVisible = ref(false)
 
-const submit = () => {
-  $bus.emit('show-connect-wallet-dialog')
+const enter = async (e) => {
+  if (e.metaKey) {
+    await submit()
+  }
+}
+
+const submit = async () => {
+  if (!store.auth.hasLogined) {
+    $bus.emit('show-connect-wallet-dialog')
+    return
+  }
+  const body = {
+    type: 'post',
+    content: parseContent(content.value, false),
+    protocol_version: '0.1',
+    id: uuidv4()
+  }
+
+  const signed = sign.sign(body)
+
+  body.public_key = signed.publicKey
+  body.signature = signed.signature
+
+  const params = {
+    method: 'POST',
+    body,
+    headers: auth.getCommonHeader()
+  }
+
+  loading.value = true
+  try {
+    const rs = await $fetch(API.CREATE_POST, params)
+    $bus.emit('post.create', rs.data.post)
+    ElMessage.success('Voice voiced!')
+    content.value = ''
+  } catch (e) {
+    ElMessage.error(e.message)
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
