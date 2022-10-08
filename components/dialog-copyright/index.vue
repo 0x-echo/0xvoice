@@ -1,10 +1,11 @@
 <template>
   <v-dialog
     class="dialog-copyright"
-    top="5vh"
+    confirm-button-text="Confirm"
     has-action-footer
     title="Choose a License"
     title-icon="ri-copyright-line"
+    top="5vh"
     @cancel="$emit('update:modelValue', false)"
     @on-close="$emit('update:modelValue', false)"
     @open="onOpenDialog"
