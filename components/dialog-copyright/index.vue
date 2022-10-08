@@ -8,17 +8,17 @@
       :model="form"
       label-position="top">
       <el-form-item
+        class="dialog-copyright__form-item"
         v-for="item in list"
         :key="item.value"
         :label="item.label"
         :prop="item.value">
-        class="dialog-copyright__form-item"
         <el-radio-group
-          v-model="form[item.value]">
           class="dialog-copyright__form-radio-group"
+          v-model="form[item.value]">
           <el-radio
-            v-for="option in item.options"
             class="dialog-copyright__form-radio"
+            v-for="option in item.options"
             :key="option.value"
             :label="option.value">
             {{ option.label }}
