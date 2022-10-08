@@ -5,9 +5,9 @@
       class="editor-box__left">
       <v-avatar
         class="editor-box__avatar"
-        :alt="store.screen_name"
-        :hash="store.address"
-        :src="store.avatar || ''">
+        :alt="store.profile.screen_name"
+        :hash="store.profile.address"
+        :src="store.profile.avatar || ''">
       </v-avatar>
     </div>
     
@@ -68,7 +68,10 @@
 
 <script setup>
 import { ElButton, ElInput } from 'element-plus'
-const { $bus } = useNuxtApp()
+import useStore from '~~/store'
+const { $bus, $showLoading } = useNuxtApp()
+
+const store = useStore()
 
 const props = defineProps({
   placeholder: {
@@ -77,11 +80,6 @@ const props = defineProps({
   }
 })
 
-const store = {
-  screen_name: 'Airyland',
-  address: '0x122324',
-  avatar: ''
-}
 
 const content = ref('')
 
