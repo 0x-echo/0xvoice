@@ -2,8 +2,9 @@
   <v-dialog
     class="dialog-copyright"
     title="Choose a License"
-    title-icon="ri-creative-commons-line">
+    title-icon="ri-copyright-line">
     <el-form
+      class="dialog-copyright__form"
       :model="form"
       label-position="top">
       <el-form-item
@@ -11,10 +12,13 @@
         :key="item.value"
         :label="item.label"
         :prop="item.value">
+        class="dialog-copyright__form-item"
         <el-radio-group
           v-model="form[item.value]">
+          class="dialog-copyright__form-radio-group"
           <el-radio
             v-for="option in item.options"
+            class="dialog-copyright__form-radio"
             :key="option.value"
             :label="option.value">
             {{ option.label }}
@@ -28,11 +32,11 @@
 <script setup>
 import { ElForm, ElFormItem, ElRadio, ElRadioGroup } from 'element-plus'
 
-let form = {
+let form = reactive({
   cc: 1,
   adapt: 1,
   commercial: 1
-}
+})
 
 const list = [{
   label: 'Allow reusers to distribute, remix, adapt, and build upon the material in any medium or format?',
@@ -77,6 +81,29 @@ const list = [{
 .dialog-copyright {
   &.el-dialog {
     max-width: 600px;
+  }
+  
+  &__form-item {
+    margin-bottom: 24px; 
+    border-radius: var(--border-radius);
+    
+    .el-form-item__label {
+      font-weight: 500;
+    }
+    
+    & + & {
+      padding-top: 24px;
+      border-top: 1px solid var(--bg-color);
+    }
+  }
+  
+  &__form-radio-group {
+    width: 100%;
+    padding: 0 12px;
+  }
+  
+  &__form-radio {
+    width: 100%;
   }
 }
 </style>

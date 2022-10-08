@@ -300,6 +300,32 @@
   }
 }
 
+.el-radio {
+  &__input {
+    &.is-checked {
+      .el-radio__inner {
+        background: transparent;
+      }
+      
+      + .el-radio__label {
+        font-weight: 500;
+      }
+    }
+  }
+  
+  &__inner {
+    &::after {
+      width: 8px;
+      height: 8px;
+      background-color: var(--color-primary);
+    }
+  }
+  
+  &__label {
+    font-weight: normal;
+  }
+}
+
 @media screen and (max-width: #{$tablet-width - 1px}) {
   .el-avatar {
     --el-avatar-size: 30px;
