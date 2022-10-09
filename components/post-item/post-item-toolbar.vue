@@ -40,7 +40,6 @@
         </i>
       </el-tooltip>
     </div>
-    
     <a
       class="post-item-toolbar__copyright-list"
       v-else
@@ -85,7 +84,8 @@ const actions = [{
 }]
 
 const copyright = computed(() => {
-  return copyrights.filter(item => { return item.value === props.data.copyright })[0]
+  const one = copyrights.find(item => { return item.value === props.data.copyright })
+  return one || {}
 }) 
 </script>
 

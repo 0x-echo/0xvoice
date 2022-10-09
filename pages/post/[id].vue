@@ -11,22 +11,19 @@
 </template>
 
 <script setup>
-const data = {
-  id: '1',
-  name: 'Airyland',
-  posted_at: 'September 22, 2022 at 2:58 PM',
-  author: {
-    screen_name: 'Airyland',
-    address: '0x12323',
-    avatar: ''
-  },
-  content: 'https://0xecho.com/widget, it already supported comment layer for @viamirror',
-  link: {
-    cover: 'https://www.goldenball.finance/images/logo-white.png',
-    title: 'Golden Ball Finance | Decentralized Gambling Ecosystem Token',
-    url: 'https://mirror.xyz'
-  }
-}
+import { react } from '@babel/types';
+import { API } from '~~/libs/api'
+
+const route = useRoute()
+
+const data = reactive({
+  author: {}
+})
+
+onMounted(async () => {
+  const _data = await $fetch(API.GET_POST_INFO.replace(':id', route.params.id))
+  Object.assign(data, _data.data)
+})
 </script>
 
 <style lang="scss">
