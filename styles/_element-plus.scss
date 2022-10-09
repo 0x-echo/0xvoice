@@ -11,6 +11,20 @@
     color: var(--text-color-secondary);
   }
   
+  &.is-plain {
+    &,
+    &:focus:not(.el-button:hover) {
+      background-color: transparent;
+    }
+    
+    &:hover,
+    &:focus {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary);
+      color: white;
+    }
+  }
+  
   &--primary {
     --el-button-hover-bg-color: var(--color-primary-dark);
     --el-button-hover-border-color: var(--color-primary-dark);
@@ -32,6 +46,20 @@
       
       &:focus:not(.el-button:hover) {
         color: var(--color-primary);
+      }
+    }
+    
+    &.is-plain {
+      &,
+      &:focus:not(.el-button:hover) {
+        background-color: transparent;
+        color: var(--color-primary);
+      }
+      
+      &:hover,
+      &:focus {
+        background-color: var(--color-primary);
+        color: white;
       }
     }
   }

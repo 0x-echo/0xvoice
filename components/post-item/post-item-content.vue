@@ -301,6 +301,7 @@ const deletePost = async () => {
   
   &__date {
     margin-left: 8px;
+    font-size: 13px;
     color: var(--text-color-muted);
   }
   

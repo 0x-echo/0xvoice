@@ -25,6 +25,7 @@
     <follow-button
       v-if="!isMe"
       :data="data"
+      :plain="false"
       size="large">
     </follow-button>
   </div>

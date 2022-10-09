@@ -29,13 +29,17 @@
         </el-input>
         
         <div
-          class="editor-box__copyright">
-          <i
-            class="editor-box__copyright-icon"
-            :class="icon"
-            v-for="icon in copyright.icons"
-            :key="icon">
-          </i>
+          class="editor-box__addon">
+          <div
+            class="editor-box__copyright"
+            @click="copyrightDialogVisible = true">
+            <i
+              class="editor-box__copyright-icon"
+              :class="icon"
+              v-for="icon in copyright.icons"
+              :key="icon">
+            </i>
+          </div>
         </div>
       </div>
       
@@ -46,19 +50,10 @@
           <div
             class="editor-box__action"
             role="button"
-            title="Object">
+            title="Object"
+            @click="targetDialogVisible = true">
             <i
               class="ri-book-2-line">
-            </i>
-          </div>
-          
-          <div
-            class="editor-box__action"
-            role="button"
-            title="Copyright"
-            @click="copyrightDialogVisible = true">
-            <i
-              class="ri-copyright-line">
             </i>
           </div>
         </div>
@@ -78,6 +73,10 @@
     <dialog-copyright
       v-model="copyrightDialogVisible">
     </dialog-copyright>
+    
+    <dialog-target
+      v-model="targetDialogVisible">
+    </dialog-target>
   </div>
 </template>
 
@@ -127,6 +126,8 @@ const copyright = computed(() => {
   let value = store.editor.copyright
   return copyrights.filter(item => { return item.value === value })[0]
 })
+
+let targetDialogVisible = ref(false)
 
 const enter = async (e) => {
   if (e.metaKey) {
@@ -207,11 +208,21 @@ const submit = async () => {
     }
   }
   
-  &__copyright {
+  &__addon {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+  
+  &__copyright {
     margin-top: 8px;
+    opacity: .8;
+    cursor: pointer;
+    transition: all .3s ease;
+    
+    &:hover {
+      opacity: 1;
+    }
   }
   
   &__copyright-icon {
@@ -225,25 +236,30 @@ const submit = async () => {
   
   &__toolbar {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-top: 16px;
   }
   
   &__toolbar-left {
     display: flex;
-    align-items: center;
   }
   
   &__action {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
+    padding: 8px;
+    font-size: 18px;
+    line-height: 18px;
+    border-radius: 50%;
     color: var(--text-color-muted);
     cursor: pointer;
+    
+    &:hover {
+      color: var(--text-color-primary);
+      background: var(--bg-color);
+    }
   }
   
   &__send-button {

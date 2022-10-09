@@ -5,6 +5,7 @@
       'is-following': data.is_following
     }"
     :type="data.is_following ? '' : 'primary'"
+    :plain="plain"
     @click.stop="_submit"
     @mouseenter="isHovering = true"
     @mouseleave="isHovering = false">
@@ -27,6 +28,10 @@ const props = defineProps({
   data: {
     type: Object,
     required: true
+  },
+  plain: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -50,25 +55,8 @@ const _submit = async () => {
 
 <style lang="scss">
 .follow-button {
-  &,
-  &:focus:not(.el-button:hover) {
-    background: transparent;
-    color: var(--color-primary);
-  }
-  
   &.is-following {
     width: 92px;
-    
-    &,
-    &:focus:not(.el-button:hover) {
-      color: var(--text-color-secondary);
-    }
-  }
-  
-  &:hover,
-  &:focus {
-    background: var(--color-primary);
-    color: white;
   }
 }
 </style>

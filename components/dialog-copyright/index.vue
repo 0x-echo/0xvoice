@@ -1,7 +1,6 @@
 <template>
   <v-dialog
     class="dialog-copyright"
-    confirm-button-text="Confirm"
     has-action-footer
     title="Choose a License"
     title-icon="ri-copyright-line"

@@ -71,7 +71,7 @@ const props = defineProps({
   },
   confirmButtonText: {
     type: String,
-    default: 'Submit'
+    default: 'Confirm'
   },
   confirmButtonType: {
     type: String,
