@@ -106,15 +106,31 @@ const nav = computed(() => {
   return list
 })
 
-const userMenu = [{
-  icon: 'ri-refresh-line',
-  label: 'Refresh profile',
-  value: 'refresh-profile'
-}, {
-  icon: 'ri-logout-circle-r-line',
-  label: 'Logout',
-  value: 'logout'
-}]
+const userMenu = computed(() => {
+  const menus = []
+  
+  if (!store.profile.screen_name.includes('.bit')) {
+    menus.push({
+      icon: 'ri-vip-crown-line',
+      label: 'Register .bit account',
+      url: 'https://app.did.id?inviter=code.bit&channel=code.bit',
+      isLink: true,
+      value: 'register-bit'
+    })
+  }
+  
+  menus.push({
+    icon: 'ri-refresh-line',
+    label: 'Refresh profile',
+    value: 'refresh-profile'
+  }, {
+    icon: 'ri-logout-circle-r-line',
+    label: 'Logout',
+    value: 'logout'
+  })
+  
+  return menus
+})
 
 let userMenuActive = ref(false)
 const onToggleUserMenu = (value) => {
