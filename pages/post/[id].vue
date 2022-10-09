@@ -4,7 +4,6 @@
     title="Post">
     <post-item
       :border="false"
-      :clickable="false"
       :data="data"
       is-detail>
     </post-item>

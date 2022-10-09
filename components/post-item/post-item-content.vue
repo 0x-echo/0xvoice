@@ -327,6 +327,7 @@ const deletePost = async () => {
   }
   
   &__text {
+    margin-top: 8px;
     font-size: 15px;
     color: var(--text-color-primary);
     
