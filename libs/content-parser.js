@@ -3,6 +3,7 @@ import markdown from 'markdown-it/dist/markdown-it'
 import hljs from '@0xecho/highlight.js/es/common'
 import emoji from 'markdown-it-emoji'
 import iterator from 'markdown-it-for-inline'
+import tags from '../packages/markdown-it-hashtag'
 
 const CODE_BLOCK_REG = /```[a-z]*\n[\s\S]*?\n```/g
 
@@ -56,6 +57,20 @@ md.use(iterator, 'url_new_win', 'link_open', function (tokens, idx) {
 export function parseContent(str, isRender = true) {
 	if (!str) {
 		return ''
+	}
+
+	if (isRender) {
+		md.use(tags)
+		md.renderer.rules.hashtag_open  = function(tokens, idx) {
+			const tagName = tokens[idx].content.toLowerCase();
+			return '<a href="/explore?tag=' + encodeURIComponent(tagName) + '" class="tag">'
+		}
+		 
+		md.renderer.rules.hashtag_text  = function(tokens, idx) {
+			return '#' + tokens[idx].content
+		}
+		 
+		md.renderer.rules.hashtag_close = function () { return '</a>' }
 	}
 
 	// trim

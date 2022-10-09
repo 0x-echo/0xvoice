@@ -4,7 +4,9 @@
     <div
       class="post-item-toolbar__date"
       v-if="isDetail">
-      {{ data.posted_at }}
+      <timeago 
+        :datetime="data.posted_at" 
+        :title="$formatDate(data.created_at)" />
     </div>
     
     <div
@@ -57,6 +59,7 @@
 </template>
 
 <script setup>
+import { Timeago } from 'vue2-timeago'
 import PostItemAction from './post-item-action'
 import { ElTooltip } from 'element-plus'
 import { copyrights } from '~~/config'
