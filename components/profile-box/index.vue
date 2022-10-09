@@ -22,13 +22,11 @@
       </div>
     </div>
     
-    <el-button
+    <follow-button
       v-if="!isMe"
-      size="large"
-      type="primary"
-      @click="follow">
-      {{ data.is_following ? 'Following' : 'Follow' }}
-    </el-button>
+      :data="data"
+      size="large">
+    </follow-button>
   </div>
 </template>
 
