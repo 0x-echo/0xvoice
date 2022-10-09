@@ -23,9 +23,11 @@
     </div>
     
     <el-button
+      v-if="!isMe"
       size="large"
-      type="primary">
-      Follow
+      type="primary"
+      @click="follow">
+      {{ data.is_following ? 'Following' : 'Follow' }}
     </el-button>
   </div>
 </template>
@@ -33,6 +35,8 @@
 <script setup>
 import { ElButton } from 'element-plus'
 import useStore from '~~/store'
+
+const { $bus } = useNuxtApp()
 
 const store = useStore()
 
@@ -45,6 +49,17 @@ const props = defineProps({
     }
   }
 })
+
+const isMe = computed(() => {
+  return store.auth.hasLogined && (store.profile.chain + '/' + store.profile.address) === (props.data.chain + '/' + props.data.address)
+})
+
+const follow = async () => {
+  if (!store.auth.hasLogined) {
+    $bus.emit('show-connect-wallet-dialog')
+    return
+  }
+}
 </script>
 
 <style lang="scss">
