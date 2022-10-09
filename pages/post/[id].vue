@@ -6,7 +6,7 @@
       :border="false"
       :clickable="false"
       :data="data"
-      is-full>
+      is-detail>
     </post-item>
   </app-main-content>
 </template>

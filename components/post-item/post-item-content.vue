@@ -2,7 +2,7 @@
   <div
     class="post-item-content"
     :class="{
-      'is-full': isFull
+      'is-detail': isDetail
     }">
     <div
       class="post-item-content__title">
@@ -31,7 +31,7 @@
         
         <span
           class="post-item-content__date"
-          v-if="!isFull">
+          v-if="!isDetail">
           <timeago 
             :datetime="data.posted_at" 
             :title="$formatDate(data.created_at)" />
@@ -161,7 +161,7 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
-  isFull: {
+  isDetail: {
     type: Boolean,
     default: false
   }
@@ -266,7 +266,7 @@ const deletePost = async () => {
 
 <style lang="scss">
 .post-item-content {
-  &.is-full {
+  &.is-detail {
     .post-item-content__title {
       font-size: 16px;
     }

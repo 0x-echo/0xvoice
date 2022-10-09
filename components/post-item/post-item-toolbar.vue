@@ -3,13 +3,13 @@
     class="post-item-toolbar">
     <div
       class="post-item-toolbar__date"
-      v-if="isFull">
+      v-if="isDetail">
       {{ data.posted_at }}
     </div>
     
     <div
       class="post-item-toolbar__action-list"
-      v-if="!isFull">
+      v-if="!isDetail">
       <post-item-action
         icon="ri-heart-line"
         value="like">
@@ -67,7 +67,7 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  isFull: {
+  isDetail: {
     type: Boolean,
     default: false
   }
@@ -110,6 +110,8 @@ const copyright = computed(() => {
   &__copyright-list {
     display: flex;
     align-items: center;
+    opacity: 0;
+    transition: all .3s ease;
     
     &:hover {
       .post-item-toolbar__copyright-icon {

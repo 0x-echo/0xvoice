@@ -3,7 +3,7 @@
     class="post-item"
     :class="{
       'is-border': border,
-      'is-clickable': clickable
+      'is-detail': isDetail
     }"
     @click="onClick">
     <div
@@ -43,7 +43,7 @@
         class="post-item__right">
         <post-item-content
           :data="post"
-          :is-full="isFull">
+          :is-detail="isDetail">
         </post-item-content>
         
         <div
@@ -59,7 +59,7 @@
         
         <post-item-toolbar
           :data="post"
-          :is-full="isFull">
+          :is-detail="isDetail">
         </post-item-toolbar>
       </div>
     </div>
@@ -78,15 +78,11 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
-  clickable: {
-    type: Boolean,
-    default: true
-  },
   data: {
     type: Object,
     required: true
   },
-  isFull: {
+  isDetail: {
     type: Boolean,
     default: false
   }
@@ -101,7 +97,7 @@ const post = computed(() => {
 })
 
 const onClick = () => {
-  if (props.clickable) {
+  if (props.isDetail) {
     router.push(`/post/${props.data.id}`)
   }
 }
@@ -117,6 +113,16 @@ const onClickRepost = () => {
   line-height: 1.625;
   padding: 24px 0 32px;
   
+  &:not(.is-detail) {
+    cursor: pointer;
+    
+    &:hover {
+      .post-item-toolbar__copyright-list {
+        opacity: 1;
+      } 
+    }
+  }
+  
   &.is-border {
     padding-left: 24px;
     padding-right: 24px;
@@ -126,10 +132,6 @@ const onClickRepost = () => {
     &:last-of-type {
       border-bottom: 0;
     }
-  }
-  
-  &.is-clickable {
-    cursor: pointer;
   }
   
   &__header {
