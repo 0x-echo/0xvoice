@@ -186,25 +186,36 @@ const toggleContent = () => {
   // }
 }
 
-const moreMenu = [{
-  icon: 'ri-information-line',
-  label: 'Arweave TX',
-  url: props.data.ar_url,
-  isLink: true,
-  value: 'view-arweave-info'
-}, 
-// {
-//   icon: 'ri-alert-line',
-//   label: 'Report',
-//   value: 'report'
-// }, 
-{
-  danger: true,
-  icon: 'ri-close-circle-line',
-  label: 'Delete',
-  value: 'delete',
-  permission: 'can_delete'
-}]
+const moreMenu = computed(() => {
+  const menus = []
+  if (props.data.ar_url) {
+    menus.push({
+      icon: 'ri-information-line',
+      label: 'Arweave TX',
+      url: props.data.ar_url,
+      isLink: true,
+      value: 'view-arweave-info'
+    })
+  } else {
+    menus.push({
+      icon: 'ri-send-plane-line',
+      label: 'Arweave',
+      value: 'view-arweave-info'
+    })
+  }
+  
+  if (props.data.can_delete) {
+    menus.push({
+      danger: true,
+      icon: 'ri-close-circle-line',
+      label: 'Delete',
+      value: 'delete',
+      permission: 'can_delete'
+    })
+  }
+  
+  return menus
+})
 
 let moreMenuActive = ref(false)
 const onToggleMoreMenu = (value) => {
@@ -212,8 +223,18 @@ const onToggleMoreMenu = (value) => {
 }
 
 const onClickMoreMenu = (value) => {
-  if (value === 'delete') {
+  if (value === 'view-arweave-info') {
+    viewArweaveInfo()
+  } else if (value === 'delete') {
     deleteDialogVisible.value = true
+  }
+}
+
+const viewArweaveInfo = () => {
+  if (!props.data.ar_id) {
+    ElMessage.info({
+      message: 'The data is not yet sent to Arweave.'
+    })
   }
 }
 
