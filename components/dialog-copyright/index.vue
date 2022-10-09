@@ -166,6 +166,10 @@ const submit = () => {
   })
   
   emits('update:modelValue', false)
+
+  try {
+    localStorage.setItem('copyright', result.value.value)
+  } catch (e) {}
 } 
 const map = {
   cc0: [1, 1, 1],
@@ -186,6 +190,17 @@ const onOpenDialog = () => {
     commercial: val[2]
   })
 }
+
+onMounted(() => {
+  try {
+    const copyright = localStorage.getItem('copyright')
+    if (copyright) {
+      store.setData('editor', {
+        copyright
+      })
+    }
+  } catch (e) {}
+})
 </script>
 
 <style lang="scss">
