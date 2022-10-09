@@ -19,7 +19,14 @@ import useStore from '~~/store'
 const store = useStore()
 const { $bus } = useNuxtApp()
 const auth = useAuth(store)
+const route = useRoute()
 
+let profile = reactive({
+  avatar: '',
+  address: '',
+  screen_name: '',
+  bio: ''
+})
 let posts = reactive([])
 let loading = ref(false)
 let page = ref(1)
@@ -30,8 +37,9 @@ const { fetch, handleScroll, _onMounted, _onBeforeUnmount } = useList({
   loading,
   page,
   done,
-  type: 'mine',
-  auth
+  auth,
+  createdBy: route.params.id,
+  profile
 })
 
 onMounted(_onMounted)

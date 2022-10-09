@@ -1,17 +1,22 @@
 import { API } from '~~/libs/api'
 import auth from './auth'
 
-export default ({ page, loading, posts, done, type, auth }) => {
+export default ({ page, loading, posts, done, type, auth, createdBy, profile }) => {
   const fetch = async () => {
     loading.value = true
     try {
       const data = await $fetch(API.GET_POST, {
         params: {
           page: page.value,
-          type
+          type,
+          created_by: createdBy
         },
         headers: auth.getCommonHeader()
       })
+
+      if (profile && data.data.profile) {
+        Object.assign(profile, data.data.profile)
+      }
   
       if (!data.data.list.length) {
         done.value = true

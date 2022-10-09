@@ -85,19 +85,26 @@ const { $showLoading } = useNuxtApp()
 
 const store = useStore()
 
-const nav = [{
-  icon: 'ri-home-2-line',
-  label: 'Home',
-  url: '/'
-}, {
-  icon: 'ri-signal-tower-line',
-  label: 'Explore',
-  url: '/explore'
-}, {
-  icon: 'ri-user-line',
-  label: 'Profile',
-  url: '/profile'
-}]
+const nav = computed(() => {
+  const list = [{
+    icon: 'ri-signal-tower-line',
+    label: 'Explore',
+    url: '/explore'
+  }]
+  if (store.auth.hasLogined) {
+    list.unshift({
+      icon: 'ri-home-2-line',
+      label: 'Home',
+      url: '/'
+    })
+    list.push({
+      icon: 'ri-user-line',
+      label: 'Profile',
+      url: store.profile.screen_name
+    })
+  }
+  return list
+})
 
 const userMenu = [{
   icon: 'ri-refresh-line',
