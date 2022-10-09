@@ -192,11 +192,13 @@ const moreMenu = [{
   url: props.data.ar_url,
   isLink: true,
   value: 'view-arweave-info'
-}, {
-  icon: 'ri-alert-line',
-  label: 'Report',
-  value: 'report'
-}, {
+}, 
+// {
+//   icon: 'ri-alert-line',
+//   label: 'Report',
+//   value: 'report'
+// }, 
+{
   danger: true,
   icon: 'ri-close-circle-line',
   label: 'Delete',
