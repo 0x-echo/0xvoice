@@ -5,6 +5,16 @@ if (/localhost/.test(document.location.href)) {
 
 export default {
   api,
+  report: {
+    reasons: [ // refer to Youtube report reasons.
+      `Unwanted commercial content or spam`,
+      `Abuse or harmful`,
+      `Pornography or sexually explicit material`,
+      `Suicide or self injury`,
+      'Misinformation',
+      'Other'
+    ]
+  },
   wallet: {
     auth_message: `I authorize publishing on ECHO from this device with my account: ADDRESS\n\nI accept the Terms of Service: https://0xecho.com/tos\n\nIssued At: TIMESTAMP\nPublic Key: PUBLIC_KEY`,
   }

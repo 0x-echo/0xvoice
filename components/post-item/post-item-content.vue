@@ -40,42 +40,23 @@
       
       <div
         v-if="hasMenu">
-        <el-popover
-          ref="menuRef"
+        <v-menu-popover
+          :menu="moreMenu"
           placement="bottom-end"
-          trigger="click"
           :width="200"
-          @before-leave="menuActive = false"
-          @show="menuActive = true">
-          <div>
-            <menu-item
-              icon="ri-flag-line"
-              label="Report"
-              @on-click="onClickMenu('report')">
-            </menu-item>
-            
-            <menu-item
-              danger
-              icon="ri-delete-bin-line"
-              label="Delete"
-              @on-click="onClickMenu('delete')">
-            </menu-item>
+          @on-click-menu-item="onClickMoreMenu"
+          @on-toggle-menu="onToggleMoreMenu">
+          <div
+            class="post-item-content__menu"
+            :class="{
+              'active': moreMenuActive
+            }"
+            @click.stop>
+            <i
+              class="ri-more-fill">
+            </i>
           </div>
-          
-          <template 
-            #reference>
-            <div
-              class="post-item-content__menu"
-              :class="{
-                'active': menuActive
-              }"
-              @click.stop>
-              <i
-                class="ri-more-fill">
-              </i>
-            </div>
-          </template>
-        </el-popover>
+        </v-menu-popover>
       </div>
     </div>
     
@@ -137,13 +118,35 @@
         </div>
       </div>
     </component>
+    
+    <dialog-confirm
+      confirm-button-text="Delete"
+      confirm-button-type="danger"
+      title="Delete Post?"
+      title-icon="ri-close-circle-line"
+      v-model="deleteDialogVisible"
+      @submit="deletePost">
+      <p>
+        The action cannot be undone.
+      </p>
+      
+      <p>
+        The post cannot be deleted after it goes on-chain in about 5 minutes.
+      </p>
+    </dialog-confirm>
   </div>
 </template>
 
 <script setup>
-import { ElButton, ElImage, ElPopover } from 'element-plus'
+import { ElButton, ElImage, ElMessage, ElPopover } from 'element-plus'
 import { parseContent } from '../../libs/content-parser'
 import { Timeago } from 'vue2-timeago'
+import useAuth from '~~/compositions/auth'
+import useStore from '~~/store'
+import { API } from '~~/libs/api'
+
+const store = useStore()
+const auth = useAuth(store)
 
 const props = defineProps({
   data: {
@@ -183,11 +186,58 @@ const toggleContent = () => {
   // }
 }
 
-let menuActive = ref(false)
-const menuRef = ref(null)
+const moreMenu = [{
+  icon: 'ri-information-line',
+  label: 'Arweave TX',
+  url: props.data.ar_url,
+  isLink: true,
+  value: 'view-arweave-info'
+}, {
+  icon: 'ri-alert-line',
+  label: 'Report',
+  value: 'report'
+}, {
+  danger: true,
+  icon: 'ri-close-circle-line',
+  label: 'Delete',
+  value: 'delete',
+  permission: 'can_delete'
+}]
 
-const onClickMenu = (value) => {
-  menuRef.value.hide()
+let moreMenuActive = ref(false)
+const onToggleMoreMenu = (value) => {
+  moreMenuActive.value = value
+}
+
+const onClickMoreMenu = (value) => {
+  if (value === 'delete') {
+    deleteDialogVisible.value = true
+  }
+}
+
+let deleteDialogVisible = ref(false)
+const deletePost = async () => {
+  try {
+    const rs = await $fetch(API.DELETE_POST + props.data.id, {
+      method: 'DELETE',
+      headers: auth.getCommonHeader()
+    })
+    currentComment = null
+    deleteDialogVisible.value = false
+    ElMessage.success({
+      message: 'Done.'
+    })
+  } catch (e) {
+    if (e.response && e.response._data) {
+      ElMessage.error({
+        message: e.response._data.msg
+      })
+    } else {
+      ElMessage.error({
+        message: 'Indexer error.'
+      })
+    }
+  }
 }
 </script>
 

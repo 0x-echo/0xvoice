@@ -110,6 +110,12 @@ const copyright = computed(() => {
   &__copyright-list {
     display: flex;
     align-items: center;
+    
+    &:hover {
+      .post-item-toolbar__copyright-icon {
+        opacity: 1;
+      } 
+    }
   }
   
   &__copyright-tooltip {
@@ -119,6 +125,8 @@ const copyright = computed(() => {
   &__copyright-icon {
     font-size: 20px;
     color: var(--text-color-muted);
+    opacity: .5;
+    transition: all .3s ease;
     
     & + & {
       margin-left: 6px;

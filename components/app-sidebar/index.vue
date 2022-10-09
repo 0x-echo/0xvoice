@@ -40,9 +40,8 @@
         :menu="userMenu"
         placement="top"
         :width="228"
-        @logout="logout"
-        @on-toggle-menu="onToggleUserMenu"
-        @refresh-profile="refreshProfile">
+        @on-click-menu-item="onClickUserMenu"
+        @on-toggle-menu="onToggleUserMenu">
         <div
           class="app-sidebar__user"
           :class="{
@@ -115,6 +114,14 @@ const onToggleUserMenu = (value) => {
   userMenuActive.value = value
 }
 
+const onClickUserMenu = (value) => {
+  if (value === 'logout') {
+    logout()
+  } else if (value === 'refresh-profile') {
+    refreshProfile()
+  }
+}
+ 
 const refreshProfile = async () => {
   const loadingMessage = $showLoading()
   

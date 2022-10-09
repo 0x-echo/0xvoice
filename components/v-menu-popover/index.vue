@@ -35,18 +35,15 @@ const props = defineProps({
 
 const emits = defineEmits([
   'on-click-menu-item',
-  'on-toggle-menu',
-  'logout',
-  'refresh-profile'
+  'on-toggle-menu'
 ])
 
 let active = ref(false)
 
 const menuPopoverRef = ref(null)
 const onClickMenu = (item) => {
-  emits(item.value)
   if (!item.isLink) {
-    emits('on-click-menu-item', item)
+    emits('on-click-menu-item', item.value)
   }
   menuPopoverRef.value.hide()
 }
