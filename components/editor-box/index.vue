@@ -28,6 +28,12 @@
           @keydown.enter="enter">
         </el-input>
         
+        <link-card
+          v-if="target.uri"
+          :data="target"
+          closable>
+        </link-card>
+      
         <div
           class="editor-box__addon">
           <div
@@ -128,6 +134,12 @@ const copyright = computed(() => {
 })
 
 let targetDialogVisible = ref(false)
+const target = {
+  uri: 'hello',
+  cover: 'https://cdn.dribbble.com/users/140655/screenshots/10741846/media/8b4fc28c3ce0cf47f16d6937d9fce319.png?compress=1&resize=1600x1200&vertical=top',
+  title: 'Credit must be given to the creator',
+  desc: 'Only noncommercial uses of the work are permitted'
+}
 
 const enter = async (e) => {
   if (e.metaKey) {
@@ -190,12 +202,13 @@ const submit = async () => {
   
   &__body {
     flex: 1;
+    min-width: 0;
   }
   
   &__content {
-    padding: 12px 15px;
+    padding: 12px 16px;
     border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
+    background: var(--bg-color);
   }
   
   &__input {
@@ -203,6 +216,7 @@ const submit = async () => {
       padding: 0;
       font-size: 14px;
       line-height: 24px;
+      background: transparent;
       color: var(--text-color-primary);
       box-shadow: none;
     }

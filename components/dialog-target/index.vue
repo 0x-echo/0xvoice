@@ -42,17 +42,18 @@
           <el-button
             class="dialog-target__preview-button"
             plain
-            type="primary">
+            type="primary"
+            @click="getResult">
             Preview
           </el-button>
         </div>
       </el-form-item>
     </el-form>
     
-    <div
-      class="dialog-target__result">
-      
-    </div>
+    <link-card
+      v-if="result.uri"
+      :data="result">
+    </link-card>
   </v-dialog>
 </template>
 
@@ -83,6 +84,16 @@ const typeOptions = [{
   value: 'isbn',
   label: 'ISBN'
 }]
+
+let result = reactive({})
+const getResult = () => {
+  Object.assign(result, {
+    uri: 'hello',
+    cover: 'https://cdn.dribbble.com/users/140655/screenshots/10741846/media/8b4fc28c3ce0cf47f16d6937d9fce319.png?compress=1&resize=1600x1200&vertical=top',
+    title: 'Credit must be given to the creator',
+    desc: 'Only noncommercial uses of the work are permitted'
+  })
+}
 
 const submit = () => {
   

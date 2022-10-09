@@ -90,34 +90,10 @@
       </el-button>
     </div>
     
-    <component
-      class="post-item-content__link-card"
-      :class="{
-        'is-link': data.link.url
-      }"
-      :is="data.link.url ? 'a' : 'div'"
-      v-if="data.link"
-      :href="data.link.url"
-      target="_blank">
-      <el-image 
-        class="post-item-content__link-card-img"
-        :alt="data.link.title"
-        :src="data.link.cover"
-        fit="cover" />
-        
-      <div
-        class="post-item-content__link-card-content">
-        <div
-          class="post-item-content__link-card-title">
-          {{ data.link.title }}
-        </div>
-        
-        <div
-          class="post-item-content__link-card-subtitle">
-          {{ data.link.url }}
-        </div>
-      </div>
-    </component>
+    <link-card
+      v-if="data.link && data.link.uri"
+      :data="data.link">
+    </link-card>
     
     <dialog-confirm
       confirm-button-text="Delete"
@@ -138,7 +114,7 @@
 </template>
 
 <script setup>
-import { ElButton, ElImage, ElMessage, ElPopover } from 'element-plus'
+import { ElButton, ElMessage, ElPopover } from 'element-plus'
 import { parseContent } from '../../libs/content-parser'
 import { Timeago } from 'vue2-timeago'
 import useAuth from '~~/compositions/auth'
@@ -478,39 +454,6 @@ const deletePost = async () => {
   
   &__more {
     margin-top: 5px;
-  }
-  
-  &__link-card {
-    display: flex;
-    align-items: center;
-    padding: 16px;
-    margin-top: 16px;
-    border-radius: var(--border-radius);
-    background: var(--bg-color);
-    
-    &.is-link {
-    }
-  }
-  
-  &__link-card-img {
-    flex-shrink: 0;
-    margin-right: 16px;
-    width: 60px;
-    height: 60px;
-  }
-  
-  &__content {
-    flex: 1;
-  }
-  
-  &__link-card-title {
-    font-size: 15px;
-    color: var(--text-color-primary);
-  }
-  
-  &__link-card-subtitle {
-    font-size: 12px;
-    color: var(--text-color-muted);
   }
 }
 </style>
