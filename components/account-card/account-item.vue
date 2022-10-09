@@ -22,10 +22,13 @@
     <el-button
       class="account-item__follow-button"
       :class="{
-        'is-unfollow': !data.is_following
+        'is-following': data.is_following
       }"
-      @click.stop="submit">
-      {{ data.is_following ? 'Following' : 'Follow' }}
+      :type="data.is_following ? '' : 'primary'"
+      @click.stop="submit"
+      @mouseenter="isHoveringFollowButton = true"
+      @mouseleave="isHoveringFollowButton = false">
+      {{ getFollowButtonText() }}
     </el-button>
   </div>
 </template>
@@ -52,6 +55,19 @@ const props = defineProps({
     required: true
   }
 })
+
+let isHoveringFollowButton = ref(false)
+const getFollowButtonText = () => {
+  if (props.data.is_following) {
+    if (isHoveringFollowButton.value) {
+      return 'Unfollow'
+    } else {
+      return 'Following'
+    }
+  } else {
+    return 'Follow'
+  }
+}
 
 const submit = async () => {
   const data = props.data
@@ -128,14 +144,15 @@ const submit = async () => {
     &,
     &:focus:not(.el-button:hover) {
       background: transparent;
+      color: var(--color-primary);
     }
     
-    &.is-unfollow {
+    &.is-following {
+      width: 92px;
+      
       &,
       &:focus:not(.el-button:hover) {
-        border-color: var(--color-primary);
-        background: transparent;
-        color: var(--color-primary);
+        color: var(--text-color-secondary);
       }
     }
     
