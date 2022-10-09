@@ -37,7 +37,6 @@ import { ElButton } from 'element-plus'
 import useStore from '~~/store'
 
 const { $bus } = useNuxtApp()
-
 const store = useStore()
 
 const props = defineProps({
@@ -53,13 +52,6 @@ const props = defineProps({
 const isMe = computed(() => {
   return store.auth.hasLogined && (store.profile.chain + '/' + store.profile.address) === (props.data.chain + '/' + props.data.address)
 })
-
-const follow = async () => {
-  if (!store.auth.hasLogined) {
-    $bus.emit('show-connect-wallet-dialog')
-    return
-  }
-}
 </script>
 
 <style lang="scss">

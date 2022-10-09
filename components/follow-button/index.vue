@@ -5,7 +5,7 @@
       'is-following': data.is_following
     }"
     :type="data.is_following ? '' : 'primary'"
-    @click.stop="submit"
+    @click.stop="_submit"
     @mouseenter="isHovering = true"
     @mouseleave="isHovering = false">
     {{ getButtonText() }}
@@ -14,6 +14,14 @@
 
 <script setup>
 import { ElButton } from 'element-plus'
+import useStore from '~~/store'
+import useFollow from '~~/compositions/follow'
+
+
+const store = useStore()
+
+let loading = ref(false)
+const { submit } = useFollow({ store, loading })
 
 const props = defineProps({
   data: {
@@ -35,8 +43,8 @@ const getButtonText = () => {
   }
 }
 
-const submit = () => {
-  
+const _submit = async () => {
+  await submit(props.data)
 }
 </script>
 

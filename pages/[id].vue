@@ -25,6 +25,7 @@ let profile = reactive({
   avatar: '',
   address: '',
   screen_name: '',
+  chain: '',
   bio: ''
 })
 let posts = reactive([])
