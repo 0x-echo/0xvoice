@@ -17,9 +17,14 @@ import useList from '~~/compositions/list'
 import useAuth from '~~/compositions/auth'
 import useStore from '~~/store'
 
+const router = useRouter()
 const store = useStore()
 const { $bus } = useNuxtApp()
 const auth = useAuth(store)
+
+if (!store.auth.hasLogined) {
+  router.replace('/explore')
+}
 
 let posts = reactive([])
 let loading = ref(false)

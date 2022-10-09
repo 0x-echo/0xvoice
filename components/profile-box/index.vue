@@ -3,22 +3,22 @@
     class="profile-box">
     <v-avatar
       class="profile-box__avatar"
-      :alt="store.profile.screen_name"
-      :hash="store.profile.address"
+      :alt="data.screen_name"
+      :hash="data.address"
       :size="100"
-      :src="store.profile.avatar || ''">
+      :src="data.avatar || ''">
     </v-avatar>
     
     <div
       class="profile-box__content">
       <div
         class="profile-box__name">
-        {{ store.profile.screen_name }}
+        {{ $formatScreenName(data.screen_name) }}
       </div>
       
       <div
         class="profile-box__bio">
-        {{ store.profile.bio }}
+        {{ data.bio }}
       </div>
     </div>
     
@@ -39,7 +39,10 @@ const store = useStore()
 const props = defineProps({
   data: {
     type: Object,
-    required: true
+    required: true,
+    default () {
+      return {}
+    }
   }
 })
 </script>

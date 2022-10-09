@@ -36,8 +36,9 @@ import useStore from '~~/store'
 import { v4 as uuidv4 } from 'uuid'
 import useSign from '~~/compositions/sign'
 import useAuth from '~~/compositions/auth'
-
 import { API } from '~~/libs/api'
+
+const { $bus } = useNuxtApp()
 
 const store = useStore()
 const sign = useSign()
