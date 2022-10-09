@@ -13,18 +13,31 @@
     
     <div
       class="editor-box__body">
-      <el-input
-        class="editor-box__input"
-        ref="editorInput"
-        v-model="content"
-        :autosize="{
-          minRows: 4
-        }"
-        :placeholder="placeholder"
-        resize="none"
-        type="textarea"
-        @keydown.enter="enter">
-      </el-input>
+      <div
+        class="editor-box__content">
+        <el-input
+          class="editor-box__input"
+          ref="editorInput"
+          v-model="content"
+          :autosize="{
+            minRows: 2
+          }"
+          :placeholder="placeholder"
+          resize="none"
+          type="textarea"
+          @keydown.enter="enter">
+        </el-input>
+        
+        <div
+          class="editor-box__copyright">
+          <i
+            class="editor-box__copyright-icon"
+            :class="icon"
+            v-for="icon in copyright.icons"
+            :key="icon">
+          </i>
+        </div>
+      </div>
       
       <div
         class="editor-box__toolbar">
@@ -73,7 +86,7 @@ import { ElButton, ElInput, ElMessage } from 'element-plus'
 import useStore from '~~/store'
 import useSign from '~~/compositions/sign'
 import useAuth from '~~/compositions/auth'
-
+import { copyrights } from '~~/config'
 import { v4 as uuidv4 } from 'uuid'
 import { parseContent } from '~~/libs/content-parser'
 import { API } from '~~/libs/api'
@@ -110,6 +123,10 @@ onMounted(() => {
 })
 
 let copyrightDialogVisible = ref(false)
+const copyright = computed(() => {
+  let value = store.editor.copyright
+  return copyrights.filter(item => { return item.value === value })[0]
+})
 
 const enter = async (e) => {
   if (e.metaKey) {
@@ -174,14 +191,35 @@ const submit = async () => {
     flex: 1;
   }
   
+  &__content {
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+  }
+  
   &__input {
     .el-textarea__inner {
-      padding: 12px 15px;
+      padding: 0;
       font-size: 14px;
       line-height: 24px;
-      background: var(--bg-color);
       color: var(--text-color-primary);
       box-shadow: none;
+    }
+  }
+  
+  &__copyright {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+  
+  &__copyright-icon {
+    font-size: 20px;
+    color: var(--text-color-muted);
+    
+    & + & {
+      margin-left: 6px;
     }
   }
   
