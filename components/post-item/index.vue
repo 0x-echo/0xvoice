@@ -97,7 +97,7 @@ const post = computed(() => {
 })
 
 const onClick = () => {
-  if (props.isDetail) {
+  if (!props.isDetail) {
     router.push(`/post/${props.data.id}`)
   }
 }
