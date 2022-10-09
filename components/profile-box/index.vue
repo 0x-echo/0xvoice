@@ -18,7 +18,7 @@
       
       <div
         class="profile-box__bio">
-        {{ data.bio }}
+        {{ data.bio || '--' }}
       </div>
     </div>
     
