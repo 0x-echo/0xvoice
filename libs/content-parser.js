@@ -63,14 +63,14 @@ export function parseContent(str, isRender = true) {
 		md.use(tags)
 		md.renderer.rules.hashtag_open  = function(tokens, idx) {
 			const tagName = tokens[idx].content.toLowerCase();
-			return '<a href="/explore?tag=' + encodeURIComponent(tagName.trim()) + '" class="tag">'
+			return '<span class="tag" data-tag="' + tagName.trim() + '">'
 		}
 		 
 		md.renderer.rules.hashtag_text  = function(tokens, idx) {
 			return '#' + tokens[idx].content.trim()
 		}
 		 
-		md.renderer.rules.hashtag_close = function () { return '</a>' }
+		md.renderer.rules.hashtag_close = function () { return '</span>' }
 	}
 
 	// trim

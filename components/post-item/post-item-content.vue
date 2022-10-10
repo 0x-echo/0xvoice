@@ -76,7 +76,8 @@
         'collapsed': hasMoreButton && collapsed
       }"
       ref="postContentRef"
-      v-html="parseContent(data.content) ">
+      v-html="parseContent(data.content)"
+      @click.stop="onClickText">
     </div>
     
     <div
@@ -123,6 +124,7 @@ import { API } from '~~/libs/api'
 
 const store = useStore()
 const auth = useAuth(store)
+const router = useRouter()
 
 const props = defineProps({
   data: {
@@ -162,6 +164,13 @@ const toggleContent = () => {
   // }
 }
 
+const onClickText = (e) => {
+  if (e.target.className === 'tag') {
+    router.push(`/explore?tag=${e.target.attributes['data-tag'].value}`)
+  }
+}
+
+// menu event
 const moreMenu = computed(() => {
   const menus = []
   if (props.data.ar_url) {
@@ -457,6 +466,7 @@ const deletePost = async () => {
       border-radius: 4px;
       font-size: 13px;
       background: var(--color-primary-light);
+      color: var(--color-primary);
       text-decoration: none;
       transition: all .3s ease;
       

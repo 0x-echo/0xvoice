@@ -28,7 +28,8 @@
     
     <div
       class="link-card__close"
-      v-if="closable">
+      v-if="closable"
+      @click="$emit('close')">
       <i
         class="ri-close-line">
       </i>
@@ -49,6 +50,10 @@ const props = defineProps({
     default: false
   }
 })
+
+const emits = defineEmits([
+  'close'
+])
 </script>
 
 <style lang="scss">
