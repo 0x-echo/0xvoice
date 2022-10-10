@@ -3,7 +3,8 @@
     class="post-item"
     :class="{
       'is-border': border,
-      'is-detail': isDetail
+      'is-detail': isDetail,
+      'is-hover': isHover
     }"
     @click="onClick">
     <div
@@ -43,7 +44,8 @@
         class="post-item__right">
         <post-item-content
           :data="post"
-          :is-detail="isDetail">
+          :is-detail="isDetail"
+          @on-more-menu-open="onMoreMenuOpen">
         </post-item-content>
         
         <div
@@ -96,6 +98,11 @@ const post = computed(() => {
   }
 })
 
+let isHover = ref(false)
+const onMoreMenuOpen = (value) => {
+  isHover.value = value
+}
+
 const onClick = () => {
   if (!props.isDetail) {
     router.push(`/post/${props.data.id}`)
@@ -131,6 +138,11 @@ const onClickRepost = () => {
     
     &:last-of-type {
       border-bottom: 0;
+    }
+    
+    &:hover,
+    &.is-hover {
+      background: rgba(244, 245, 250, .2);
     }
   }
   

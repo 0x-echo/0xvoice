@@ -130,7 +130,7 @@ const copyright = computed(() => {
   &__copyright-icon {
     font-size: 20px;
     color: var(--text-color-muted);
-    opacity: .5;
+    opacity: .8;
     transition: all .3s ease;
     
     & + & {

@@ -5,7 +5,7 @@
       class="app-main-content__wrapper">
       <div
         class="app-main-content__header"
-        v-if="title">
+        v-if="title || $slots.title">
         <div
           class="app-main-content__back-icon"
           v-if="hasBack"
@@ -14,10 +14,13 @@
             class="ri-arrow-left-line">
           </i>
         </div>
-        
+
         <h2
           class="app-main-content__title">
-          {{ title }}
+          <slot
+            name="title">
+            {{ title }}
+          </slot>
         </h2>
       </div>
       

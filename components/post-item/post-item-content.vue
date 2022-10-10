@@ -86,7 +86,7 @@
       <el-button
         text
         type="primary"
-        @click="toggleContent">
+        @click.stop="toggleContent">
         {{ collapsed ? 'Show more' : 'Show less' }}
       </el-button>
     </div>
@@ -145,6 +145,10 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits([
+  'on-more-menu-open'
+])
+
 const postContentRef = ref(null)
 let hasMoreButton = ref(false)
 let collapsed = ref(true)
@@ -167,6 +171,8 @@ const toggleContent = () => {
 const onClickText = (e) => {
   if (e.target.className === 'tag') {
     router.push(`/explore?tag=${e.target.attributes['data-tag'].value}`)
+  } else if (e.target.nodeName !== 'A') {
+    router.push(`/post/${props.data.id}`)
   }
 }
 
@@ -205,6 +211,8 @@ const moreMenu = computed(() => {
 let moreMenuActive = ref(false)
 const onToggleMoreMenu = (value) => {
   moreMenuActive.value = value
+  
+  emits('on-more-menu-open', value)
 }
 
 const onClickMoreMenu = (value) => {
