@@ -28,6 +28,8 @@ import useAuth from '~~/compositions/auth'
 import { ElMessage } from 'element-plus'
 import { API } from '../libs/api'
 
+const GetWalletConnectProvider = () => import('@walletconnect/web3-provider/dist/umd/index.min.js')
+
 const { $bus, $showLoading } = useNuxtApp()
 const store = useStore()
 const sign = useSign()
