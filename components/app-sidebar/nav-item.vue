@@ -36,7 +36,7 @@ const props = defineProps({
   height: 48px;
   padding: 0 16px;
   border-radius: var(--border-radius);
-  color: var(--text-color-secondary);
+  color: rgba(76, 80, 93, .8);
   transition: all .3s ease;
   
   &.active {
@@ -45,7 +45,7 @@ const props = defineProps({
   }
   
   &:hover {
-    color: var(--text-color-primary);
+    color: var(--text-color-secondary);
   }
   
   & + & {
