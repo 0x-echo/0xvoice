@@ -74,6 +74,10 @@ const _submit = async () => {
   &:hover {
     background: white;
   }
+  
+  &__avatar {
+    flex-shrink: 0;
+  }
 
   &__content {
     flex: 1;
