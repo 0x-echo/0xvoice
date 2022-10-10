@@ -29,11 +29,29 @@
       </slot>
       
       <slot>
-        <post-item
-          v-for="item in posts"
-          :key="item.id"
-          :data="item">
-        </post-item>
+        <div
+          class="app-main-content__post-list"
+          v-if="posts.length">
+          <post-item
+            v-for="item in posts"
+            :key="item.id"
+            :data="item">
+          </post-item>
+        </div>
+        
+        <div
+          class="app-main-content__empty"
+          v-else>
+          <img 
+            class="app-main-content__empty-image"
+            alt="No Data"
+            src="@/assets/empty.svg" >
+          
+          <div
+            class="app-main-content__empty-text">
+            No Data
+          </div>
+        </div>
       </slot>
     </div>
   </div>
@@ -98,6 +116,26 @@ const props = defineProps({
   &__title {
     font-size: 22px;
     font-weight: 600;
+  }
+  
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    padding: 24px;
+    color: var(--text-color-muted);
+    opacity: .8;
+  }
+  
+  &__empty-image {
+    width: 100px;
+  }
+  
+  &__empty-text {
+    margin-top: 10px;
+    font-size: 12px;
   }
 }
 </style>

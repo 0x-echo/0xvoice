@@ -41,7 +41,11 @@ const props = defineProps({
   
   &.active {
     background: #edeff7;
-    color: var(--color-primary);
+    color: var(--text-color-primary);
+  }
+  
+  &:hover {
+    color: var(--text-color-primary);
   }
   
   & + & {
