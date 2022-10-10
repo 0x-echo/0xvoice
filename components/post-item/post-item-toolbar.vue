@@ -14,12 +14,14 @@
       v-if="!isDetail">
       <post-item-action
         icon="ri-heart-line"
-        value="like">
+        value="like"
+        @click="$router.push(`/post/${data.id}`)">
       </post-item-action>
       
       <post-item-action
         icon="ri-chat-3-line"
-        value="reply">
+        value="reply"
+        @click="$router.push(`/post/${data.id}`)">
       </post-item-action>
       
       <!-- <post-item-action
