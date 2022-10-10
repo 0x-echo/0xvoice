@@ -195,15 +195,15 @@ const moreMenu = computed(() => {
     })
   }
   
-  if (props.data.can_delete) {
-    menus.push({
-      danger: true,
-      icon: 'ri-close-circle-line',
-      label: 'Delete',
-      value: 'delete',
-      permission: 'can_delete'
-    })
-  }
+  // if (props.data.can_delete) {
+  //   menus.push({
+  //     danger: true,
+  //     icon: 'ri-close-circle-line',
+  //     label: 'Delete',
+  //     value: 'delete',
+  //     permission: 'can_delete'
+  //   })
+  // }
   
   return menus
 })
