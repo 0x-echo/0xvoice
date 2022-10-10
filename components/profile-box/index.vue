@@ -38,10 +38,10 @@
           </span>
         </div>
       </div>
-      
+
       <follow-button
         class="profile-box__follow-button"
-        v-if="!isMe"
+        v-if="!isMe && data.address"
         :data="data"
         :plain="false">
       </follow-button>
