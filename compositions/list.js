@@ -2,6 +2,7 @@ import { API } from '~~/libs/api'
 import auth from './auth'
 
 export default ({ page, loading, posts, done, type, auth, createdBy, profile }) => {
+  const route = useRoute()
   const fetch = async () => {
     loading.value = true
     try {
@@ -9,7 +10,8 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
         params: {
           page: page.value,
           type,
-          created_by: createdBy
+          created_by: createdBy,
+          tag: route.query.tag
         },
         headers: auth.getCommonHeader()
       })
@@ -17,7 +19,11 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
       if (profile && data.data.profile) {
         Object.assign(profile, data.data.profile)
       }
-  
+      
+      if (page.value === 1) {
+        posts.length = 0
+      }
+
       if (!data.data.list.length) {
         done.value = true
       } else {
@@ -48,9 +54,16 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
 
   const _onMounted = async () => {
     await fetch()
+
+    watch(route, async (val) => {
+      page.value = 1
+      await fetch()
+    })
+  
     const element = document.querySelector('.app-main-content')
     element.addEventListener('scroll', handleScroll)
   }
+
 
   const _onBeforeUnmount = async () => {
     const element = document.querySelector('.app-main-content')
