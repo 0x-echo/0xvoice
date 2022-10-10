@@ -34,12 +34,15 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
         posts.length = 0
       }
 
-      if (!data.data.list.length || data.data.list.length < LIMIT) {
+      if (!data.data.list.length) {
         done.value = true
       } else {
         data.data.list.forEach(one => {
           posts.push(one)
         })
+      }
+      if (data.data.list.length < LIMIT) {
+        data.value = true
       }
     } catch (e) {
       console.log('list:', e)
