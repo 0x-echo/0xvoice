@@ -2,9 +2,9 @@
   <el-button
     class="follow-button"
     :class="{
-      'is-following': data.is_following
+      'is-following': data.is_following && store.auth.hasLogined
     }"
-    :type="data.is_following ? '' : 'primary'"
+    :type="data.is_following && store.auth.hasLogined ? '' : 'primary'"
     :plain="plain"
     @click.stop="_submit"
     @mouseenter="isHovering = true"
@@ -37,7 +37,7 @@ const props = defineProps({
 
 let isHovering = ref(false)
 const getButtonText = () => {
-  if (props.data.is_following) {
+  if (props.data.is_following && store.auth.hasLogined) {
     if (isHovering.value) {
       return 'Unfollow'
     } else {

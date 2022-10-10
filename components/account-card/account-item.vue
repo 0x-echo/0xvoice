@@ -46,7 +46,7 @@ const props = defineProps({
 
 let isHoveringFollowButton = ref(false)
 const getFollowButtonText = () => {
-  if (props.data.is_following) {
+  if (props.data.is_following && store.auth.hasLogined) {
     if (isHoveringFollowButton.value) {
       return 'Unfollow'
     } else {
