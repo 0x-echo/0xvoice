@@ -35,6 +35,10 @@ const store = useStore()
 const { $bus } = useNuxtApp()
 const auth = useAuth(store)
 
+useHead({
+  title: 'Explore | VOICE | Our Voice Matters'
+})
+
 let posts = reactive([])
 let loading = ref(false)
 let page = ref(1)

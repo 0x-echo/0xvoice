@@ -23,6 +23,10 @@ const store = useStore()
 const { $bus } = useNuxtApp()
 const auth = useAuth(store)
 
+useHead({
+  title: 'Home | VOICE | Our Voice Matters'
+})
+
 if (!store.auth.hasLogined) {
   router.replace('/explore')
 }

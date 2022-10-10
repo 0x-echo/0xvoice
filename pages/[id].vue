@@ -22,6 +22,10 @@ const { $bus } = useNuxtApp()
 const auth = useAuth(store)
 const route = useRoute()
 
+useHead({
+  title: 'Profile | VOICE | Our Voice Matters'
+})
+
 let profile = reactive({
   avatar: '',
   address: '',

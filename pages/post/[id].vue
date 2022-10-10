@@ -23,8 +23,11 @@ import useStore from '~~/store'
 
 const store = useStore()
 const { $showLoading } = useNuxtApp()
-
 const route = useRoute()
+
+useHead({
+  title: 'Post | VOICE | Our Voice Matters'
+})
 
 const data = reactive({
   id: '',
