@@ -128,6 +128,7 @@ const isMe = computed(() => {
     &__body {
       flex-direction: column;
       align-items: center;
+      margin-top: -40px;
     }
     
     &__avatar {
