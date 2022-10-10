@@ -59,7 +59,7 @@
           
           <div
             class="app-main-content__empty-text">
-            No Data
+            Coming soon
           </div>
         </div>
       </slot>
