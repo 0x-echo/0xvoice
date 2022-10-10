@@ -40,7 +40,9 @@
       </div>
       
       <user-action
-        class="nav-drawer__action">
+        class="nav-drawer__action"
+        popover-width="calc(100vw - 32px)"
+        @on-click-user-menu="emits('update:modelValue', false)">
       </user-action>
     </div>
   </el-drawer>
@@ -55,10 +57,6 @@ const store = useStore()
 const emits = defineEmits([
   'update:modelValue'
 ])
-
-const connectWallet = () => {
-  emits('update:modelValue', false)
-}
 </script>
 
 <style lang="scss">

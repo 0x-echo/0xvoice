@@ -23,7 +23,7 @@
             {{ title }}
           </slot>
         </h2>
-        
+
         <div
           class="app-main-content__nav-icon"
           @click="navDrawerVisible = true">

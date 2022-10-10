@@ -13,7 +13,7 @@
       v-if="store.auth.hasLogined"
       :menu="userMenu"
       placement="top"
-      :width="228"
+      :width="popoverWidth"
       @on-click-menu-item="onClickUserMenu"
       @on-toggle-menu="onToggleUserMenu">
       <div
@@ -57,6 +57,17 @@ const { $showLoading } = useNuxtApp()
 
 const store = useStore()
 
+const props = defineProps({
+  popoverWidth: {
+    type: [Number, String],
+    default: 228
+  }
+})
+
+const emits = defineEmits([
+  'on-click-user-menu'
+])
+
 const userMenu = computed(() => {
   const menus = []
   
@@ -94,6 +105,8 @@ const onClickUserMenu = (value) => {
   } else if (value === 'refresh-profile') {
     refreshProfile()
   }
+  
+  emits('on-click-user-menu')
 }
 
 const refreshProfile = async () => {
