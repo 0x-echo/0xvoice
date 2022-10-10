@@ -147,6 +147,9 @@ const onClickRepost = () => {
   }
   
   &.is-detail {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--bg-color);
+    
     .post-item-toolbar__copyright-list {
       opacity: 1;
     } 

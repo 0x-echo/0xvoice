@@ -306,6 +306,7 @@ const deletePost = async () => {
     height: 24px;
     border-radius: 50%;
     color: var(--text-color-muted);
+    cursor: pointer;
     transition: all .3s ease;
     
     &.active,

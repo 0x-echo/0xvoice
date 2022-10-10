@@ -22,10 +22,10 @@
         value="reply">
       </post-item-action>
       
-      <post-item-action
+      <!-- <post-item-action
         icon="ri-repeat-line"
         value="repost">
-      </post-item-action>
+      </post-item-action> -->
     </div>
     
     <div
@@ -42,6 +42,7 @@
         </i>
       </el-tooltip>
     </div>
+    
     <a
       class="post-item-toolbar__copyright-list"
       v-else
@@ -81,10 +82,12 @@ const actions = [{
 }, {
   icon: 'ri-chat-3-line',
   value: 'reply'
-}, {
-  icon: 'ri-repeat-line',
-  value: 'repost'
-}]
+}
+// , {
+//   icon: 'ri-repeat-line',
+//   value: 'repost'
+// }
+]
 
 const copyright = computed(() => {
   const one = copyrights.find(item => { return item.value === props.data.copyright })
@@ -100,7 +103,7 @@ const copyright = computed(() => {
   margin-top: 16px;
   
   &__date {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-color-muted);
   }
   

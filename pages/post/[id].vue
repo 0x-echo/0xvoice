@@ -7,7 +7,7 @@
       :data="data"
       is-detail>
     </post-item>
-
+    
     <iframe
       class="echo-iframe"
       frameborder="0"
