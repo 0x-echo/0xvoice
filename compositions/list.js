@@ -1,6 +1,8 @@
 import { API } from '~~/libs/api'
 import auth from './auth'
 
+const LIMIT = 20
+
 export default ({ page, loading, posts, done, type, auth, createdBy, profile }) => {
   const route = useRoute()
   const { $showLoading } = useNuxtApp()
@@ -18,7 +20,8 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
           page: page.value,
           type,
           created_by: createdBy,
-          tag: route.query.tag
+          tag: route.query.tag,
+          limit: LIMIT
         },
         headers: auth.getCommonHeader()
       })
@@ -31,7 +34,7 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
         posts.length = 0
       }
 
-      if (!data.data.list.length) {
+      if (!data.data.list.length || data.data.list.length < LIMIT) {
         done.value = true
       } else {
         data.data.list.forEach(one => {
