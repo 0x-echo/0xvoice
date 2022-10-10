@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     }, {
       hid: 'keywords',
       name: 'keywords',
-      content: 'web3, comment widget, tip',
+      content: '',
     }, {
       hid: 'description',
       name: 'description',
@@ -52,8 +52,8 @@ export default defineNuxtConfig({
   vite: {
     // plugins: [eslintPlugin()],
     plugins: [
-      //polyfillExports(),
-      commonjs(),
+      // polyfillExports(),
+      // commonjs(),
       // inject({ Buffer: ['buffer', 'Buffer'] })
     ],
     optimizeDeps: {
