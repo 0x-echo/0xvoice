@@ -17,7 +17,7 @@
 
         <h2
           class="app-main-content__title"
-          v-if="title">
+          v-if="title || $slots.title">
           <slot
             name="title">
             {{ title }}
@@ -26,6 +26,7 @@
 
         <div
           class="app-main-content__nav-icon"
+          v-if="isMobile"
           @click="navDrawerVisible = true">
           <i
             class="ri-menu-line">
@@ -162,7 +163,7 @@ const checkIfMobile = () => {
   }
   
   &__nav-icon {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 32px;
@@ -203,10 +204,6 @@ const checkIfMobile = () => {
     
     &__header {
       padding-bottom: 16px;
-    }
-    
-    &__nav-icon {
-      display: flex;
     }
     
     .editor-box {
