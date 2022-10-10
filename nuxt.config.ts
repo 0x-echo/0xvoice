@@ -38,6 +38,11 @@ export default defineNuxtConfig({
       href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
     }]
   },
+  script: [{
+    src: 'https://analytics.0xecho.com/js/plausible.js',
+    'data-domain': '0xvoice.com',
+    defer: true
+  }],
   buildModules: [
     '@pinia/nuxt',
   ],
