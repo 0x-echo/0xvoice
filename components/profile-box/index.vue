@@ -30,11 +30,11 @@
         <div
           class="profile-box__stat">
           <span>
-            <b>10</b> Following
+            <b>0</b> Following
           </span>
           
           <span>
-            <b>10</b> Followers
+            <b>0</b> Followers
           </span>
         </div>
       </div>
