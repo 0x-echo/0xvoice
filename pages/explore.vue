@@ -11,7 +11,8 @@
         </span>
         
         <span
-          class="explore-page__title-tag">
+          class="explore-page__title-tag"
+          @click="$router.push('/explore')">
           #{{ $route.query.tag }}
         </span>
       </template>
@@ -55,7 +56,29 @@ onBeforeUnmount(_onBeforeUnmount)
 <style lang="scss">
 .explore-page {
   &__title-tag {
+    position: relative;
+    margin-left: 6px;
     color: var(--color-primary);
+    cursor: pointer;
+    overflow: hidden;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--color-primary);
+      transform: translateX(-100%);
+      transition: all .1s ease;
+    }
+    
+    &:hover {
+      &::after {
+        transform: translateX(0);
+      }
+    }
   }
 }
 </style>
