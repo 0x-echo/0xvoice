@@ -4,6 +4,9 @@ import auth from './auth'
 export default ({ page, loading, posts, done, type, auth, createdBy, profile }) => {
   const route = useRoute()
   const fetch = async () => {
+    if (done.value) {
+      return
+    }
     loading.value = true
     try {
       const data = await $fetch(API.GET_POST, {
@@ -50,7 +53,7 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
       page.value++
       await fetch()
     }
-  };
+  }
 
   const _onMounted = async () => {
     await fetch()
