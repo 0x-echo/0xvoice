@@ -152,6 +152,10 @@ const submit = async () => {
     $bus.emit('show-connect-wallet-dialog')
     return
   }
+  if (content.value.length < 3) {
+    ElMessage.error('Please type something')
+    return
+  }
   const body = {
     id: uuidv4(),
     type: 'post',
