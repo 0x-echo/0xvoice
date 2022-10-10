@@ -1,6 +1,8 @@
 <template>
   <v-dialog
     class="dialog-target"
+    confirm-button-text="Coming soon"
+    confirm-button-disabled
     has-action-footer
     title="Choose a Target"
     title-icon="ri-book-2-line"

@@ -28,11 +28,11 @@
           @keydown.enter="enter">
         </el-input>
         
-        <link-card
+        <!-- <link-card
           v-if="target.uri"
           :data="target"
           closable>
-        </link-card>
+        </link-card> -->
       
         <div
           class="editor-box__addon">
