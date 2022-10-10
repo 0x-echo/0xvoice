@@ -103,7 +103,7 @@ const isMe = computed(() => {
   
   &__name {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
   }
   
   &__bio {
