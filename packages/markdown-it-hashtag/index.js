@@ -17,6 +17,28 @@ function hashtag_text(tokens, idx) {
   return '#' + tokens[idx].content;
 }
 
+const breaks = /^[\n\s\t\r]$/
+function extractTags (text) {
+  text += '\n'
+  const tags = []
+  let isTag = false
+  const list = text.split('')
+  let temp = ''
+  list.forEach(w => {
+    if (w === '#') {
+      isTag = true
+      temp = '#'
+    } else if (breaks.test(w)) {
+      isTag = false
+      temp.includes('#') && tags.push(temp)
+      temp = ''
+    } else {
+      temp += w
+    }
+  })
+  return tags.length ? tags : null
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 function isLinkOpen(str)  { return /^<a[>\s]/i.test(str); }
@@ -93,8 +115,7 @@ export default function hashtag_plugin(md, options) {
 
         // find hashtags
         text = currentToken.content;
-        matches = text.match(regex);
-
+        matches = extractTags(text) // text.match(regex);
         if (matches === null) { continue; }
 
         nodes = [];
@@ -102,7 +123,6 @@ export default function hashtag_plugin(md, options) {
 
         for (m = 0; m < matches.length; m++) {
           tagName = matches[m].split('#', 2)[1];
-
           // find the beginning of the matched text
           pos = text.indexOf(matches[m]);
           // find the beginning of the hashtag

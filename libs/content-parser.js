@@ -63,7 +63,7 @@ export function parseContent(str, isRender = true) {
 		md.use(tags)
 		md.renderer.rules.hashtag_open  = function(tokens, idx) {
 			const tagName = tokens[idx].content.toLowerCase();
-			return '<span class="tag" data-tag="' + tagName.trim() + '">'
+			return '<span class="tag" data-tag="' + tagName.trim().toLowerCase() + '">'
 		}
 		 
 		md.renderer.rules.hashtag_text  = function(tokens, idx) {
