@@ -450,6 +450,21 @@ const deletePost = async () => {
     th {
       font-weight: 600;
     }
+    
+    .tag {
+      margin-right: 5px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 13px;
+      background: var(--color-primary-light);
+      text-decoration: none;
+      transition: all .3s ease;
+      
+      &:hover {
+        color: white;
+        background: var(--color-primary);
+      }
+    }
   }
   
   &__more {

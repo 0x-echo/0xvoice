@@ -8,7 +8,7 @@
 
 function hashtag_open(tokens, idx) {
   var tagName = tokens[idx].content.toLowerCase();
-  return '<a href="/tags/' + tagName + '" class="tag">';
+  return '<a href="/tags/' + tagName.trim() + '" class="tag">';
 }
 
 function hashtag_close() { return '</a>'; }
