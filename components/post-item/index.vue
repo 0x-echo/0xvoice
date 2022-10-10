@@ -185,6 +185,7 @@ const onClickRepost = () => {
   
   &__right {
     flex: 1;
+    min-width: 0;
   }
   
   &__repost-card {

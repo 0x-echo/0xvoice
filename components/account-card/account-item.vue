@@ -13,7 +13,7 @@
     <div
       class="account-item__content">
       <div
-        class="account-item__name"
+        class="account-item__name ellipsis"
         :to="data.address">
         {{ $formatScreenName(data.screen_name) }}
       </div>
@@ -77,6 +77,7 @@ const _submit = async () => {
 
   &__content {
     flex: 1;
+    min-width: 0;
     margin: 0 12px;
   }
   

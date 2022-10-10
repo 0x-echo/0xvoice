@@ -23,7 +23,7 @@
         </router-link>
         
         <router-link
-          class="post-item-content__byline"
+          class="post-item-content__byline ellipsis"
           :to="`/${data.author.screen_name}`"
           @click.stop>
           {{ $ellipsisInMiddle(data.author.screen_name) }}
@@ -280,6 +280,7 @@ const deletePost = async () => {
   &__info {
     display: flex;
     align-items: center;
+    margin-right: 12px;
   }
   
   &__avatar {
@@ -293,6 +294,7 @@ const deletePost = async () => {
   }
   
   &__date {
+    flex-shrink: 0;
     margin-left: 8px;
     font-size: 13px;
     color: var(--text-color-muted);

@@ -158,6 +158,7 @@ const checkIfMobile = () => {
   &__title {
     flex: 1;
     min-width: 0;
+    display: flex;
     font-size: 22px;
     font-weight: 600;
   }
