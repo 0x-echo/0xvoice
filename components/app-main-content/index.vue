@@ -31,7 +31,7 @@
       <slot>
         <div
           class="app-main-content__post-list"
-          v-if="posts.length">
+          v-if="!loading || posts.length">
           <post-item
             v-for="item in posts"
             :key="item.id"
@@ -41,7 +41,7 @@
         
         <div
           class="app-main-content__empty"
-          v-else>
+          v-if="!loading && !posts.length">
           <img 
             class="app-main-content__empty-image"
             alt="No Data"
@@ -68,6 +68,10 @@ const props = defineProps({
   },
   title: {
     type: String
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 })
 </script>

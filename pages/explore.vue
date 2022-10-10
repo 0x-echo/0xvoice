@@ -1,5 +1,6 @@
 <template>
   <app-main-content
+    :loading="loading"
     :posts="posts">
     <template
       #title>
