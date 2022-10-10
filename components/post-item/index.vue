@@ -146,6 +146,12 @@ const onClickRepost = () => {
     }
   }
   
+  &.is-detail {
+    .post-item-toolbar__copyright-list {
+      opacity: 1;
+    } 
+  }
+  
   &__header {
     margin-bottom: 16px;
   }
