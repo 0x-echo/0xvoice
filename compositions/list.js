@@ -3,11 +3,15 @@ import auth from './auth'
 
 export default ({ page, loading, posts, done, type, auth, createdBy, profile }) => {
   const route = useRoute()
+  const { $showLoading } = useNuxtApp()
+  let showLoading
+
   const fetch = async () => {
     if (done.value) {
       return
     }
     loading.value = true
+    showLoading = $showLoading()
     try {
       const data = await $fetch(API.GET_POST, {
         params: {
@@ -38,6 +42,7 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
       console.log('list:', e)
     } finally {
       loading.value = false
+      showLoading && showLoading.close()
     }
   }
 
