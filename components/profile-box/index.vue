@@ -1,33 +1,51 @@
 <template>
   <div
     class="profile-box">
-    <v-avatar
-      class="profile-box__avatar"
-      :alt="data.screen_name"
-      :hash="data.address"
-      :size="100"
-      :src="data.avatar || ''">
-    </v-avatar>
-    
     <div
-      class="profile-box__content">
-      <div
-        class="profile-box__name">
-        {{ $formatScreenName(data.screen_name) }}
-      </div>
-      
-      <div
-        class="profile-box__bio">
-        {{ data.bio || '--' }}
-      </div>
+      class="profile-box__banner">
     </div>
     
-    <follow-button
-      v-if="!isMe"
-      :data="data"
-      :plain="false"
-      size="large">
-    </follow-button>
+    <div
+      class="profile-box__body">
+      <v-avatar
+        class="profile-box__avatar"
+        :alt="data.screen_name"
+        :hash="data.address"
+        :size="110"
+        :src="data.avatar || ''">
+      </v-avatar>
+      
+      <div
+        class="profile-box__content">
+        <div
+          class="profile-box__name">
+          {{ $formatScreenName(data.screen_name) }}
+        </div>
+        
+        <!-- <div
+          class="profile-box__bio">
+          {{ data.bio || '--' }}
+        </div> -->
+        
+        <div
+          class="profile-box__stat">
+          <span>
+            <b>10</b> Following
+          </span>
+          
+          <span>
+            <b>10</b> Followers
+          </span>
+        </div>
+      </div>
+      
+      <follow-button
+        class="profile-box__follow-button"
+        v-if="!isMe"
+        :data="data"
+        :plain="false">
+      </follow-button>
+    </div>
   </div>
 </template>
 
@@ -55,14 +73,32 @@ const isMe = computed(() => {
 
 <style lang="scss">
 .profile-box {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 32px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--bg-color);
+  
+  &__banner {
+    width: 100%;
+    height: 160px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(to right, #c2e59c, #64b3f4);
+  }
+  
+  &__body {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 24px;
+    margin-top: -45px;
+  }
   
   &__content {
     flex: 1;
     margin: 0 16px;
+  }
+  
+  &__avatar {
+    border: 5px solid white;
+    margin-bottom: -5px;
   }
   
   &__name {
@@ -73,6 +109,39 @@ const isMe = computed(() => {
   &__bio {
     font-size: 15px;
     color: var(--text-color-muted);
+  }
+  
+  &__stat {
+    margin-top: 4px;
+    font-size: 13px;
+    
+    span {
+      margin-right: 8px;
+    }
+  }
+}
+
+@media screen and (max-width: #{$tablet-width - 1}) {
+  .profile-box {
+    padding-bottom: 32px;
+    
+    &__body {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    &__avatar {
+      --el-avatar-size: 80px !important;
+      margin-bottom: 0;
+    }
+    
+    &__content {
+      text-align: center;
+    }
+    
+    &__follow-button {
+      margin-top: 12px;
+    }
   }
 }
 </style>
