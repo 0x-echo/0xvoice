@@ -9,14 +9,14 @@
         <img 
           class="app-sidebar__logo-image"
           src="@/assets/logo.svg" 
-          alt="Voice">
+          alt="VOICE">
       </router-link>
     </div>
     
     <nav
       class="app-sidebar__nav">
       <nav-item
-        v-for="item in nav"
+        v-for="item in store.getNav()"
         :key="item.url"
         :icon="item.icon"
         :label="item.label"
@@ -26,157 +26,17 @@
     
     <div
       class="app-sidebar__footer">
-      <el-button
-        v-if="!store.auth.hasLogined"
-        class="app-sidebar__connect-button"
-        size="large"
-        type="primary"
-        @click="$bus.emit('show-connect-wallet-dialog')">
-        Connect Wallet
-      </el-button>
-      
-      <v-menu-popover
-        v-if="store.auth.hasLogined"
-        :menu="userMenu"
-        placement="top"
-        :width="228"
-        @on-click-menu-item="onClickUserMenu"
-        @on-toggle-menu="onToggleUserMenu">
-        <div
-          class="app-sidebar__user"
-          :class="{
-            'active': userMenuActive
-          }">
-          <v-avatar
-            class="app-sidebar__user-avatar"
-            :alt="store.profile.screen_name"
-            :hash="store.profile.address"
-            size="small"
-            :src="store.profile.avatar || ''">
-          </v-avatar>
-          
-          <div
-            class="app-sidebar__user-content">
-            <div
-              class="app-sidebar__user-name ellipsis">
-              {{ $ellipsisInMiddle(store.profile.screen_name) }}
-            </div>
-            
-            <div
-              class="app-sidebar__user-address">
-              {{ $ellipsisInMiddle(store.profile.address) }}
-            </div>
-          </div>
-          
-          <i
-            class="ri-more-fill app-sidebar__user-more">
-          </i>
-        </div>
-      </v-menu-popover>
+      <user-action>
+      </user-action>
     </div>
   </aside>
 </template>
 
 <script setup>
 import NavItem from './nav-item'
-import { ElButton, ElMessage } from 'element-plus'
 import useStore from '~~/store'
-const { $showLoading } = useNuxtApp()
 
 const store = useStore()
-
-const nav = computed(() => {
-  const list = [{
-    icon: 'ri-signal-tower-line',
-    label: 'Explore',
-    url: '/explore'
-  }]
-  if (store.auth.hasLogined) {
-    list.unshift({
-      icon: 'ri-home-2-line',
-      label: 'Home',
-      url: '/'
-    })
-    list.push({
-      icon: 'ri-user-line',
-      label: 'Profile',
-      url: store.profile.screen_name
-    })
-  }
-  return list
-})
-
-const userMenu = computed(() => {
-  const menus = []
-  
-  if (!store.profile.screen_name.includes('.bit')) {
-    menus.push({
-      icon: 'ri-vip-crown-line',
-      label: 'Register .bit account',
-      url: 'https://app.did.id?inviter=code.bit&channel=code.bit',
-      isLink: true,
-      value: 'register-bit'
-    })
-  }
-  
-  menus.push({
-    icon: 'ri-refresh-line',
-    label: 'Refresh profile',
-    value: 'refresh-profile'
-  }, {
-    icon: 'ri-logout-circle-r-line',
-    label: 'Logout',
-    value: 'logout'
-  })
-  
-  return menus
-})
-
-let userMenuActive = ref(false)
-const onToggleUserMenu = (value) => {
-  userMenuActive.value = value
-}
-
-const onClickUserMenu = (value) => {
-  if (value === 'logout') {
-    logout()
-  } else if (value === 'refresh-profile') {
-    refreshProfile()
-  }
-}
- 
-const refreshProfile = async () => {
-  const loadingMessage = $showLoading()
-  
-  try {
-    await store.getScreenName(true)
-    ElMessage.success({
-      message: 'Refreshing done!'
-    })
-  } finally {
-    loadingMessage.close()
-  }
-}
-
-const logout = (silent = false) => {
-  store.setData('auth', {
-    hasLogined: false,
-    token: ''
-  })
-  store.setLoginInfo({
-    chain: '',
-    address: '',
-    screen_name: '',
-    avatar: '',
-    balance: ''
-  })
-  localStorage.removeItem('login_info')
-  if (!silent) {
-    ElMessage.success({
-      message: 'Logout successfully!'
-    })
-  } 
-}
 </script>
 
 <style lang="scss">
@@ -251,45 +111,6 @@ const logout = (silent = false) => {
       }
     }
   }
-  
-  &__user {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all .3s ease;
-    
-    &:hover,
-    &.active {
-      background: #edeff7;
-    }
-  }
-  
-  &__user-avatar {
-    flex-shrink: 0;
-  }
-  
-  &__user-content {
-    flex: 1;
-    min-width: 0;
-    margin: 0 12px;
-  }
-  
-  &__user-name {
-    font-size: 14px;
-    font-weight: 600;
-  }
-  
-  &__user-address {
-    margin-top: 1px;
-    font-size: 12px;
-    color: var(--text-color-muted);
-  }
-  
-  &__user-more {
-    color: var(--text-color-secondary);
-  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -323,14 +144,30 @@ const logout = (silent = false) => {
       height: 36px;
     }
     
-    &__user {
+    .user-action__connect-button {
+      &::before {
+        top: 0;
+      }
+      
+      &::after {
+        display: none;
+      }
+    }
+    
+    .user-action__user {
       padding: 0;
     }
     
-    &__user-content,
-    &__user-more {
+    .user-action__user-content,
+    .user-action__user-more {
       display: none;
     }
+  }
+}
+
+@media screen and (max-width: #{$tablet-width - 1}) {
+  .app-sidebar {
+    display: none;
   }
 }
 </style>

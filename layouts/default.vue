@@ -1,8 +1,7 @@
 <template>
   <div
     class="app">
-    <app-sidebar
-      @show-connect-wallet-dialog="connectDialogVisible = true">
+    <app-sidebar>
     </app-sidebar>
     
     <main
@@ -274,12 +273,19 @@ const connectWallet =  async (item) => {
 
 .app-main {
   flex: 1;
+  min-width: 0;
   display: flex;
 }
 
 @media screen and (max-width: 1200px) {
   .app {
     padding-left: 0;
+  }
+}
+
+@media screen and (max-width: #{$tablet-width - 1}) {
+  .app {
+    padding-right: 0;
   }
 }
 </style>

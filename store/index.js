@@ -28,6 +28,26 @@ const useStore = defineStore('global', {
     }
   }),
 	actions: {
+    getNav () {
+      const list = [{
+        icon: 'ri-signal-tower-line',
+        label: 'Explore',
+        url: '/explore'
+      }]
+      if (this.auth.hasLogined) {
+        list.unshift({
+          icon: 'ri-home-2-line',
+          label: 'Home',
+          url: '/'
+        })
+        list.push({
+          icon: 'ri-user-line',
+          label: 'Profile',
+          url: this.profile.screen_name
+        })
+      }
+      return list
+    },
     setData (module, data) {
       if (!module) {
         return

@@ -5,7 +5,7 @@
       class="app-main-content__wrapper">
       <div
         class="app-main-content__header"
-        v-if="title || $slots.title">
+        v-if="title || $slots.title || isMobile">
         <div
           class="app-main-content__back-icon"
           v-if="hasBack"
@@ -16,12 +16,21 @@
         </div>
 
         <h2
-          class="app-main-content__title">
+          class="app-main-content__title"
+          v-if="title">
           <slot
             name="title">
             {{ title }}
           </slot>
         </h2>
+        
+        <div
+          class="app-main-content__nav-icon"
+          @click="navDrawerVisible = true">
+          <i
+            class="ri-menu-line">
+          </i>
+        </div>
       </div>
       
       <slot
@@ -54,12 +63,22 @@
         </div>
       </slot>
     </div>
+    
+    <nav-drawer
+      v-model="navDrawerVisible">
+    </nav-drawer>
   </div>
 </template>
 
 <script setup>
+import NavDrawer from './nav-drawer'
+
 const props = defineProps({
   hasBack: {
+    type: Boolean,
+    default: false
+  },
+  loading: {
     type: Boolean,
     default: false
   },
@@ -68,12 +87,29 @@ const props = defineProps({
   },
   title: {
     type: String
-  },
-  loading: {
-    type: Boolean,
-    default: false
   }
 })
+
+let navDrawerVisible = ref(false)
+
+let isMobile = ref(false)
+onMounted(() => {
+  checkIfMobile()
+  window.addEventListener('resize', checkIfMobile)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkIfMobile)
+})
+
+const checkIfMobile = () => {
+  const widget = document.querySelector('.app')
+  if (widget.clientWidth < 768) {
+    isMobile.value = true
+  } else {
+    isMobile.value = false
+  }
+}
 </script>
 
 <style lang="scss">
@@ -97,6 +133,7 @@ const props = defineProps({
   &__header {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     padding-bottom: 24px;
   }
   
@@ -118,8 +155,20 @@ const props = defineProps({
   }
   
   &__title {
+    flex: 1;
+    min-width: 0;
     font-size: 22px;
     font-weight: 600;
+  }
+  
+  &__nav-icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    cursor: pointer;
   }
   
   &__empty {
@@ -140,6 +189,37 @@ const props = defineProps({
   &__empty-text {
     margin-top: 10px;
     font-size: 12px;
+  }
+}
+
+@media screen and (max-width: #{$tablet-width - 1}) {
+  .app-main-content {
+    padding: 0;
+    
+    &__wrapper {
+      padding: 16px;
+      border-radius: 0;
+    }
+    
+    &__header {
+      padding-bottom: 16px;
+    }
+    
+    &__nav-icon {
+      display: flex;
+    }
+    
+    .editor-box {
+      padding: 16px 0;
+    }
+    
+    .editor-box__left {
+      display: none;
+    }
+    
+    .post-item {
+      padding: 16px 0;
+    }
   }
 }
 </style>

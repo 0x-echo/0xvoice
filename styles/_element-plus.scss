@@ -354,7 +354,7 @@
   }
 }
 
-@media screen and (max-width: #{$tablet-width - 1px}) {
+@media screen and (max-width: #{#{$tablet-width - 1}}) {
   .el-avatar {
     --el-avatar-size: 30px;
     

@@ -131,7 +131,7 @@ const getLoading = (text) => {
   }
 }
 
-@media screen and (max-width: #{$tablet-width - 1px}) {
+@media screen and (max-width: #{#{$tablet-width - 1}}) {
   .dialog-connect {
     &__item {
       width: 100%;

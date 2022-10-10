@@ -56,3 +56,9 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: #{$tablet-width - 1}) {
+  body {
+    background: white;
+  }
+}
