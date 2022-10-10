@@ -11,6 +11,7 @@ export default ({
   loading
 }) => {
   const auth = useAuth(store)
+  const { $bus } = useNuxtApp()
 
   const submit = async (data) => {
     if (!store.auth.hasLogined) {
