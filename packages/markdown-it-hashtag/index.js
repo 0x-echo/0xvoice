@@ -40,7 +40,6 @@ export default function hashtag_plugin(md, options) {
   }
 
   const reg = '(' + preceding + ')#(' + hashtagRegExp + ')'
-  console.log('reg', reg)
   regex = new RegExp(reg, 'g');
 
 
@@ -101,7 +100,6 @@ export default function hashtag_plugin(md, options) {
         nodes = [];
         level = currentToken.level;
 
-        console.log('matches', matches)
         for (m = 0; m < matches.length; m++) {
           tagName = matches[m].split('#', 2)[1];
 
