@@ -276,4 +276,10 @@ const connectWallet =  async (item) => {
   flex: 1;
   display: flex;
 }
+
+@media screen and (max-width: 1200px) {
+  .app {
+    padding-left: 0;
+  }
+}
 </style>

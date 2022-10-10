@@ -53,11 +53,11 @@ const props = defineProps({
   }
   
   &__icon {
-    margin-right: 16px;
     font-size: 18px;
   }
   
   &__label {
+    margin-left: 16px;
     font-size: 14px;
   }
 }

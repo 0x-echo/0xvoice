@@ -54,38 +54,6 @@ onMounted(async () => {
   }
 })
 
-// const accounts = [{
-//   id: '1',
-//   screen_name: 'Airyland',
-//   address: '0x12032425',
-//   avatar: '',
-//   is_following: false
-// }, {
-//   id: '2',
-//   screen_name: 'Joanne',
-//   address: '0x12032424',
-//   avatar: '',
-//   is_following: true
-// }, {
-//   id: '3',
-//   screen_name: 'Airyland',
-//   address: '0x12032423',
-//   avatar: '',
-//   is_following: false
-// }, {
-//   id: '4',
-//   screen_name: 'Joanne',
-//   address: '0x12032422',
-//   avatar: '',
-//   is_following: false
-// }, {
-//   id: '5',
-//   screen_name: 'Joanne',
-//   address: '0x12032421',
-//   avatar: '',
-//   is_following: false
-// }]
-
 const footerLinks = [{
   label: 'Terms of Service',
   value: '/'
@@ -129,6 +97,19 @@ const footerLinks = [{
   
   &__slogan {
     margin-top: 5px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .app-side-content {
+    width: 300px;
+    padding-left: 24px;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .app-side-content {
+    display: none;
   }
 }
 </style>

@@ -291,4 +291,46 @@ const logout = (silent = false) => {
     color: var(--text-color-secondary);
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .app-sidebar {
+    align-items: center;
+    width: 68px;
+    padding-right: 0;
+    
+    .nav-item {
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      
+      + .nav-item {
+        margin-top: 8px;
+      }
+    }
+    
+    .nav-item__label {
+      display: none;
+    }
+    
+    &__header {
+      padding-top: 32px;
+      margin-bottom: 45px;
+    }
+    
+    &__logo-image {
+      width: 36px;
+      height: 36px;
+    }
+    
+    &__user {
+      padding: 0;
+    }
+    
+    &__user-content,
+    &__user-more {
+      display: none;
+    }
+  }
+}
 </style>
