@@ -30,11 +30,11 @@
         <div
           class="profile-box__stat">
           <span>
-            <b>0</b> Following
+            <b>{{ data.followings || 0 }}</b> Following
           </span>
           
           <span>
-            <b>0</b> Followers
+            <b>{{ data.followers || 0 }}</b> Followers
           </span>
         </div>
       </div>
