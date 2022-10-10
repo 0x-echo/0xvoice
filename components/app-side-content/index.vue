@@ -54,13 +54,15 @@ onMounted(async () => {
   }
 })
 
-const footerLinks = [{
-  label: 'Terms of Service',
-  value: '/'
-}, {
-  label: 'Privacy Policy',
-  value: '/'
-}]
+const footerLinks = [
+// {
+//   label: 'Terms of Service',
+//   value: '/'
+// }, {
+//   label: 'Privacy Policy',
+//   value: '/'
+// }
+]
 </script>
 
 <style lang="scss">
