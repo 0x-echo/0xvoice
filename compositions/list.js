@@ -42,7 +42,7 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
         })
       }
       if (data.data.list.length < LIMIT) {
-        data.value = true
+        done.value = true
       }
     } catch (e) {
       console.log('list:', e)
@@ -71,6 +71,7 @@ export default ({ page, loading, posts, done, type, auth, createdBy, profile }) 
 
     watch(route, async (val) => {
       page.value = 1
+      done.value = false
       await fetch()
     })
   
