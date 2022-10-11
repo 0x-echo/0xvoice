@@ -45,7 +45,8 @@ const { fetch, handleScroll, _onMounted, _onBeforeUnmount } = useList({
   done,
   auth,
   createdBy: route.params.id,
-  profile
+  profile,
+  store
 })
 
 onMounted(_onMounted)

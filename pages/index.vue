@@ -42,7 +42,8 @@ const { fetch, handleScroll, _onMounted, _onBeforeUnmount } = useList({
   page,
   done,
   type: 'following',
-  auth
+  auth,
+  store
 })
 
 onMounted(_onMounted)

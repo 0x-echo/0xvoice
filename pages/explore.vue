@@ -50,7 +50,8 @@ const { fetch, handleScroll, _onMounted, _onBeforeUnmount } = useList({
   page,
   done,
   type: '',
-  auth
+  auth,
+  store
 })
 
 onMounted(_onMounted)

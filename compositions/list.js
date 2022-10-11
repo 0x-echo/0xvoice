@@ -1,14 +1,19 @@
+import { storeToRefs } from 'pinia'
 import { API } from '~~/libs/api'
 import auth from './auth'
 
 const LIMIT = 20
 
-export default ({ page, loading, posts, done, type, auth, createdBy, profile }) => {
+export default ({ page, loading, posts, done, type, auth, createdBy, profile, store }) => {
   const route = useRoute()
   const { $showLoading } = useNuxtApp()
   let showLoading
 
   const fetch = async () => {
+    // if not yet authorized but type = following
+    if (!store.auth.hasLogined && type === 'following') {
+      return
+    }
     if (done.value) {
       return
     }
