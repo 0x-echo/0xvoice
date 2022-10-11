@@ -3,14 +3,9 @@
     class="app-sidebar">
     <div
       class="app-sidebar__header">
-      <router-link
-        class="app-sidebar__logo"
-        to="/">
-        <img 
-          class="app-sidebar__logo-image"
-          src="@/assets/logo.svg" 
-          alt="VOICE">
-      </router-link>
+      <v-logo
+        class="app-sidebar__logo">
+      </v-logo>
     </div>
     
     <nav
@@ -54,17 +49,7 @@ const store = useStore()
   }
   
   &__header {
-    padding-top: 24px;
-    margin-bottom: 41px;
-  }
-  
-  &__logo {
-    display: flex;
-  }
-  
-  &__logo-image {
-    width: 48px;
-    height: 48px;
+    margin: 24px 0 41px;
   }
   
   &__nav {
@@ -135,13 +120,22 @@ const store = useStore()
     }
     
     &__header {
-      padding-top: 32px;
-      margin-bottom: 45px;
+      margin: 32px 0 45px;
     }
     
-    &__logo-image {
-      width: 36px;
-      height: 36px;
+    &__logo {
+      .v-logo__image {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .v-logo__label {
+        display: none;
+      }
+    }
+    
+    &__footer {
+      margin-bottom: 32px;
     }
     
     .user-action__connect-button {

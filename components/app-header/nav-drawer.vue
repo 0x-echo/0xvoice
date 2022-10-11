@@ -9,10 +9,9 @@
     :with-header="false">
     <div
       class="nav-drawer__header">
-      <img 
-        class="nav-drawer__logo"
-        src="@/assets/logo.svg" 
-        alt="VOICE">
+      <v-logo
+        size="small">
+      </v-logo>
       
       <div
         class="nav-drawer__close-button"
@@ -64,19 +63,21 @@ const emits = defineEmits([
   .el-drawer__body {
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 0;
   }
   
   &__header {
-    height: 33px;
-    margin-bottom: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 60px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--bg-color);
   }
   
   &__logo {
-    width: 32px;
+    width: 36px;
+    height: 36px;
   }
   
   &__close-button {
@@ -96,6 +97,7 @@ const emits = defineEmits([
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 16px;
   }
   
   &__nav-item {

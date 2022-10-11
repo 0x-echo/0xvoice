@@ -8,29 +8,8 @@
       </account-card>
     </div>
     
-    <div
-      class="app-side-content__footer">
-      <nav>
-        <router-link
-          class="app-side-content__footer-link"
-          v-for="item in footerLinks"
-          :key="item.value"
-          :to="item.value"
-          target="_blank">
-          {{ item.label }}
-        </router-link>
-      </nav>
-      
-      <div
-        class="app-side-content__copyright">
-        © 2022 VOICE x ECHO
-      </div>
-      
-      <div
-        class="app-side-content__slogan">
-        Our Voice Matters.
-      </div>
-    </div>
+    <app-footer>
+    </app-footer>
   </div>
 </template>
 
@@ -80,25 +59,6 @@ const footerLinks = [
   
   &__content {
     flex: 1;
-  }
-  
-  &__footer {
-    margin-top: 32px;
-    font-size: 12px;
-    color: var(--text-color-secondary);
-  }
-  
-  &__footer-link {
-    margin-right: 12px;
-    color: var(--text-color-secondary);
-  }
-  
-  &__copyright {
-    margin-top: 5px;
-  }
-  
-  &__slogan {
-    margin-top: 5px;
   }
 }
 

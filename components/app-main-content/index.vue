@@ -1,11 +1,15 @@
 <template>
   <div
     class="app-main-content">
+    <app-header
+      class="app-main-content__header">
+    </app-header>
+    
     <div
       class="app-main-content__wrapper">
       <div
-        class="app-main-content__header"
-        v-if="title || $slots.title || isMobile">
+        class="app-main-content__page-header"
+        v-if="title || $slots.title">
         <div
           class="app-main-content__back-icon"
           v-if="hasBack"
@@ -16,22 +20,12 @@
         </div>
 
         <h2
-          class="app-main-content__title"
-          v-if="title || $slots.title">
+          class="app-main-content__title">
           <slot
             name="title">
             {{ title }}
           </slot>
         </h2>
-
-        <div
-          class="app-main-content__nav-icon"
-          v-if="isMobile"
-          @click="navDrawerVisible = true">
-          <i
-            class="ri-menu-line">
-          </i>
-        </div>
       </div>
       
       <slot
@@ -65,15 +59,14 @@
       </slot>
     </div>
     
-    <nav-drawer
-      v-model="navDrawerVisible">
-    </nav-drawer>
+    <app-footer
+      class="app-main-content__footer"
+      center>
+    </app-footer>
   </div>
 </template>
 
 <script setup>
-import NavDrawer from './nav-drawer'
-
 const props = defineProps({
   hasBack: {
     type: Boolean,
@@ -90,27 +83,6 @@ const props = defineProps({
     type: String
   }
 })
-
-let navDrawerVisible = ref(false)
-
-let isMobile = ref(false)
-onMounted(() => {
-  checkIfMobile()
-  window.addEventListener('resize', checkIfMobile)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', checkIfMobile)
-})
-
-const checkIfMobile = () => {
-  const widget = document.querySelector('.app')
-  if (widget.clientWidth < 768) {
-    isMobile.value = true
-  } else {
-    isMobile.value = false
-  }
-}
 </script>
 
 <style lang="scss">
@@ -131,7 +103,7 @@ const checkIfMobile = () => {
     background: white;
   }
   
-  &__header {
+  &__page-header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -163,16 +135,6 @@ const checkIfMobile = () => {
     font-weight: 600;
   }
   
-  &__nav-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
   &__empty {
     display: flex;
     flex-direction: column;
@@ -192,18 +154,35 @@ const checkIfMobile = () => {
     margin-top: 10px;
     font-size: 12px;
   }
+  
+  &__header,
+  &__footer {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .app-main-content {
+    &__footer {
+      display: block;
+    }
+  }
 }
 
 @media screen and (max-width: #{$tablet-width - 1}) {
   .app-main-content {
-    padding: 0;
+    padding-top: 0;
+    
+    &__header {
+      display: flex;
+    }
     
     &__wrapper {
       padding: 16px;
       border-radius: 0;
     }
     
-    &__header {
+    &__page-header {
       padding-bottom: 16px;
     }
     
@@ -217,6 +196,10 @@ const checkIfMobile = () => {
     
     .post-item {
       padding: 16px 0;
+    }
+    
+    .post-item-toolbar__copyright-list {
+      opacity: 1;
     }
   }
 }
