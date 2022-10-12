@@ -331,7 +331,7 @@ const deletePost = async () => {
     color: var(--text-color-primary);
     
     &.collapsed {
-      max-height: 105px;
+      max-height: 130px;
       overflow: hidden;
       mask-image: linear-gradient(var(--theme-bg-color) 50%, transparent);
     }
