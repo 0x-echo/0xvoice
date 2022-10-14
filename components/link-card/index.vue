@@ -60,11 +60,18 @@ const emits = defineEmits([
 .link-card {
   display: flex;
   align-items: center;
+  width: 100%;
   padding: 16px;
   margin-top: 16px;
   border: 1px solid var(--bg-color);
   border-radius: var(--border-radius);
   background: white;
+  line-height: 1.5;
+  transition: all .3s ease;
+  
+  &:hover {
+    border-color: var(--border-color);
+  }
   
   &__image {
     flex-shrink: 0;
