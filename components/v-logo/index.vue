@@ -30,8 +30,8 @@ const props = defineProps({
   
   &--small {
     .v-logo__image {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
     }
     
     .v-logo__label {
@@ -41,14 +41,14 @@ const props = defineProps({
   }
   
   &__image {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
   }
   
   &__label {
     margin-left: 10px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: var(--text-color-primary);
   }

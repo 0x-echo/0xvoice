@@ -29,6 +29,7 @@
         </el-input>
         
         <!-- <link-card
+          class="editor-box__link-card"
           v-if="target.uri"
           :data="target"
           closable>
@@ -224,6 +225,10 @@ const submit = async () => {
       color: var(--text-color-primary);
       box-shadow: none;
     }
+  }
+  
+  &__link-card {
+    border: 0;
   }
   
   &__addon {

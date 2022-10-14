@@ -108,6 +108,7 @@ const props = defineProps({
     align-items: center;
     justify-content: flex-end;
     padding-bottom: 24px;
+    line-height: 34px;
   }
   
   &__back-icon {
@@ -171,6 +172,7 @@ const props = defineProps({
 
 @media screen and (max-width: #{$tablet-width - 1}) {
   .app-main-content {
+    height: auto;
     padding-top: 0;
     
     &__header {

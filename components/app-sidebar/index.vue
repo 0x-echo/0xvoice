@@ -49,7 +49,7 @@ const store = useStore()
   }
   
   &__header {
-    margin: 24px 0 41px;
+    margin: 27px 0 47px;
   }
   
   &__nav {
