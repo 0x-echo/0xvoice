@@ -96,6 +96,14 @@
       :data="data.link">
     </link-card>
     
+    <el-image-viewer
+      v-if="viewerVisible"
+      hide-on-click-modal
+      teleported
+      :url-list="[viewerSrc]"
+      @close="viewerVisible = false">
+    </el-image-viewer>
+    
     <dialog-confirm
       confirm-button-text="Delete"
       confirm-button-type="danger"
@@ -115,7 +123,7 @@
 </template>
 
 <script setup>
-import { ElButton, ElMessage, ElPopover } from 'element-plus'
+import { ElButton, ElImageViewer, ElMessage, ElPopover } from 'element-plus'
 import { parseContent } from '../../libs/content-parser'
 import { Timeago } from 'vue2-timeago'
 import useAuth from '~~/compositions/auth'
@@ -168,12 +176,17 @@ const toggleContent = () => {
   // }
 }
 
+let viewerVisible = ref(false)
+let viewerSrc = ref('')
 const onClickText = (e) => {
   if (e.target.className === 'tag') {
     router.push(`/explore?tag=${e.target.attributes['data-tag'].value}`)
+  } else if (e.target.nodeName === 'IMG') {
+    viewerSrc.value = e.target.currentSrc
+    viewerVisible.value = true
   } else if (e.target.nodeName !== 'A') {
     router.push(`/post/${props.data.id}`)
-  }
+  } 
 }
 
 // menu event
