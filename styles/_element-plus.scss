@@ -354,7 +354,7 @@
   }
 }
 
-@media screen and (max-width: #{#{$tablet-width - 1}}) {
+@media screen and (max-width: #{$tablet-width - 1}) {
   .el-avatar {
     --el-avatar-size: 30px;
     
@@ -370,6 +370,17 @@
     
     &__body {
       padding: 20px 20px 30px; 
+    }
+  }
+  
+  .el-image-viewer {
+    &__mask {
+      opacity: 1;
+    }
+    
+    &__close,
+    &__actions {
+      display: none;
     }
   }
 }

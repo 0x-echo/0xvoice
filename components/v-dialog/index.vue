@@ -161,7 +161,7 @@ const submit = () => {
   }
 }
 
-@media screen and (max-width: #{#{$tablet-width - 1}}) {
+@media screen and (max-width: #{$tablet-width - 1}) {
   .v-dialog {
     &__title-icon {
       font-size: 20px;

@@ -104,7 +104,7 @@ const props = defineProps({
   }
 }
 
-@media screen and (max-width: #{#{$tablet-width - 1}}) {
+@media screen and (max-width: #{$tablet-width - 1}) {
   .wallet-item {
     flex-direction: row;
     justify-content: flex-start;
