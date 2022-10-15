@@ -229,6 +229,7 @@ const submit = async () => {
       line-height: 24px;
       background: transparent;
       color: var(--text-color-primary);
+      border-radius: 0;
       box-shadow: none;
     }
   }
