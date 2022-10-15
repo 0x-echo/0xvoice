@@ -41,7 +41,8 @@ const echo = computed(() => {
     'color-theme': 'light',
     height: 600,
     'hide_wallet': store.auth.hasLogined ? 'true' : 'false',
-    receiver: data.author.screen_name
+    receiver: data.author.screen_name,
+    'no-padding-in-mobile': 'true'
   })
 })
 
