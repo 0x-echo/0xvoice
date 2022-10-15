@@ -25,6 +25,12 @@
     }
   }
   
+  &.is-loading {
+    span {
+      opacity: 0;
+    }
+  }
+  
   &--primary {
     --el-button-hover-bg-color: var(--color-primary-dark);
     --el-button-hover-border-color: var(--color-primary-dark);

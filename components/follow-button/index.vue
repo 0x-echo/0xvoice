@@ -4,11 +4,18 @@
     :class="{
       'is-following': data.is_following && store.auth.hasLogined
     }"
-    :type="data.is_following && store.auth.hasLogined ? '' : 'primary'"
+    :loading="loading"
     :plain="plain"
+    :type="data.is_following && store.auth.hasLogined ? '' : 'primary'"
     @click.stop="_submit"
     @mouseenter="isHovering = true"
-    @mouseleave="isHovering = false">
+    @mouseleave="isHovering = false">   
+    <template
+      #loading>
+      <v-loader>
+      </v-loader>
+    </template> 
+    
     {{ getButtonText() }}
   </el-button>
 </template>
@@ -55,6 +62,8 @@ const _submit = async () => {
 
 <style lang="scss">
 .follow-button {
+  position: relative;
+  
   &.is-following {
     width: 92px;
   }

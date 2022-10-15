@@ -42,10 +42,18 @@ body {
 
 .v-loader {
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid white;
   clip-path: inset(0 0 50% 0);
   transform: rotate(0);
   animation: spin .6s linear infinite;
+  
+  .el-button & {
+    position: absolute;
+  }
+  
+  .el-button--primary.is-plain & {
+    border-color: var(--color-primary);
+  }
 }
 
 @keyframes spin {

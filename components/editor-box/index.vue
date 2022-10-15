@@ -72,6 +72,12 @@
           :loading="loading"
           @keydown.enter="enter"
           @click="submit">
+          <template
+            #loading>
+            <v-loader
+              size="18">
+            </v-loader>
+          </template> 
           {{ buttonText }}
         </el-button>
       </div>
