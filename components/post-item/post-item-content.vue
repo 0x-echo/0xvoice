@@ -162,7 +162,7 @@ let hasMoreButton = ref(false)
 let collapsed = ref(true)
 
 onMounted(() => {
-  if (postContentRef.value.clientHeight > 105) {
+  if (postContentRef.value.clientHeight > 400) {
     hasMoreButton.value = true
   }
 })
@@ -344,7 +344,7 @@ const deletePost = async () => {
     color: var(--text-color-primary);
     
     &.collapsed {
-      max-height: 130px;
+      max-height: 400px;
       overflow: hidden;
       mask-image: linear-gradient(var(--theme-bg-color) 50%, transparent);
     }
