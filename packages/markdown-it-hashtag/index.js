@@ -17,7 +17,7 @@ function hashtag_text(tokens, idx) {
   return '#' + tokens[idx].content;
 }
 
-const breaks = /^[\n\s\t\r]$/
+const breaks = /^[\n\s\t\r,，.。!！;；~?？]$/
 function extractTags (text) {
   text += '\n'
   const tags = []
