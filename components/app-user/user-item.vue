@@ -67,7 +67,6 @@ const props = defineProps({
   &:hover,
   &.active {
     background: var(--color-primary-lighter);
-    color: var(--color-primary);
   }
   
   &__avatar {
