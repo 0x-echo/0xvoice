@@ -38,11 +38,11 @@
         </nav-item>
       </div>
       
-      <user-action
+      <app-user
         class="nav-drawer__action"
         popover-width="calc(100vw - 32px)"
         @on-click-user-menu="emits('update:modelValue', false)">
-      </user-action>
+      </app-user>
     </div>
   </el-drawer>
 </template>
@@ -109,7 +109,7 @@ const emits = defineEmits([
   &__action {
     margin-top: 30px;
     
-    .user-action__user {
+    .app-user__user {
       background: var(--bg-color);
     }
   }

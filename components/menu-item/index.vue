@@ -66,7 +66,7 @@ const emits = defineEmits([
   align-items: center;
   height: 36px;
   padding: 0 10px;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   color: var(--text-color-secondary);
   cursor: pointer;
   transition: all .3s ease;

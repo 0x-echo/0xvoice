@@ -4,16 +4,22 @@
     trigger="click"
     @before-leave="onToggleMenu(false)"
     @show="onToggleMenu(true)">
-    <menu-item
-      v-for="item in menu"
-      :key="item.value"
-      :danger="item.danger"
-      :icon="item.icon"
-      :is-link="item.isLink"
-      :label="item.label"
-      :url="item.url"
-      @on-click="onClickMenu(item)">
-    </menu-item>
+    <slot
+      name="top">
+    </slot>
+    
+    <div>
+      <menu-item
+        v-for="item in menu"
+        :key="item.value"
+        :danger="item.danger"
+        :icon="item.icon"
+        :is-link="item.isLink"
+        :label="item.label"
+        :url="item.url"
+        @on-click="onClickMenu(item)">
+      </menu-item>
+    </div>
     
     <template
       #reference>

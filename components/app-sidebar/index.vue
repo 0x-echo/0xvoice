@@ -21,8 +21,8 @@
     
     <div
       class="app-sidebar__footer">
-      <user-action>
-      </user-action>
+      <app-user>
+      </app-user>
     </div>
   </aside>
 </template>
@@ -138,7 +138,7 @@ const store = useStore()
       margin-bottom: 32px;
     }
     
-    .user-action__connect-button {
+    .app-user__connect-button {
       &::before {
         top: 0;
       }
@@ -148,12 +148,12 @@ const store = useStore()
       }
     }
     
-    .user-action__user {
+    .app-user__user {
       padding: 0;
     }
     
-    .user-action__user-content,
-    .user-action__user-more {
+    .app-user__user-content,
+    .app-user__user-more {
       display: none;
     }
   }

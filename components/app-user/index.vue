@@ -1,9 +1,9 @@
 <template>
   <div
-    class="user-action">
+    class="app-user">
     <el-button
       v-if="!store.auth.hasLogined"
-      class="user-action__connect-button"
+      class="app-user__connect-button"
       size="large"
       type="primary"
       @click="$bus.emit('show-connect-wallet-dialog')">
@@ -16,44 +16,36 @@
       :width="popoverWidth"
       @on-click-menu-item="onClickUserMenu"
       @on-toggle-menu="onToggleUserMenu">
-      <div
-        class="user-action__user"
-        :class="{
-          'active': userMenuActive
-        }">
-        <v-avatar
-          class="user-action__user-avatar"
-          :alt="store.profile.screen_name"
-          :hash="store.profile.address"
-          size="small"
-          :src="store.profile.avatar || ''">
-        </v-avatar>
-        
+      <template
+        #top>
         <div
-          class="user-action__user-content">
-          <div
-            class="user-action__user-name ellipsis">
-            {{ $ellipsisInMiddle(store.profile.screen_name) }}
-          </div>
-          
-          <div
-            class="user-action__user-address">
-            {{ $ellipsisInMiddle(store.profile.address) }}
-          </div>
+          class="app-user__account-list">
+          <user-item
+            v-for="item in accounts"
+            :key="item.address"
+            :data="item">
+          </user-item>
         </div>
-        
+      </template>
+      
+      <user-item
+        class="app-user__info"
+        :active="userMenuActive"
+        avatar-size="small"
+        :data="store.profile">
         <i
-          class="ri-more-fill user-action__user-more">
+          class="ri-more-fill app-user__info-more">
         </i>
-      </div>
+      </user-item>
     </v-menu-popover>
   </div>
 </template>
 
 <script setup>
 import { ElButton, ElMessage } from 'element-plus'
+import UserItem from './user-item'
 import useStore from '~~/store'
-const { $showLoading } = useNuxtApp()
+const { $ellipsisInMiddle, $showLoading } = useNuxtApp()
 
 const store = useStore()
 
@@ -68,8 +60,28 @@ const emits = defineEmits([
   'on-click-user-menu'
 ])
 
+const accounts = [{
+  address: "0x3c98b726cd9e9f20becafd05a9affecd61617c0b",
+  avatar: "https://ipfs.io/ipfs/QmVD87KnmMEgmDtV254xo3171KNpvv6xidQqaZZ9bpbzFX",
+  screen_name: "airyland.eth"
+}, {
+  address: "0x3c3ccd801ebd986fe75440055e99096b33368666",
+  avatar: null,
+  screen_name: "0x3c3ccd801ebd986fe75440055e99096b33368666"
+}]
+
 const userMenu = computed(() => {
   const menus = []
+  
+  menus.push({
+    icon: 'ri-user-line',
+    label: 'Add an account',
+    value: 'add-account'
+  }, {
+    icon: 'ri-refresh-line',
+    label: 'Refresh profile',
+    value: 'refresh-profile'
+  })
   
   if (!store.profile.screen_name.includes('.bit')) {
     menus.push({
@@ -81,15 +93,19 @@ const userMenu = computed(() => {
     })
   }
   
-  menus.push({
-    icon: 'ri-refresh-line',
-    label: 'Refresh profile',
-    value: 'refresh-profile'
-  }, {
-    icon: 'ri-logout-circle-r-line',
-    label: 'Logout',
-    value: 'logout'
-  })
+  if (accounts.length === 1) {
+    menus.push({
+      icon: 'ri-logout-circle-r-line',
+      label: 'Logout',
+      value: 'logout'
+    })
+  } else if (accounts.length > 1) {
+    menus.push({
+      icon: 'ri-logout-circle-r-line',
+      label: `Logout ${$ellipsisInMiddle(store.profile.screen_name)}`,
+      value: 'logout'
+    })
+  }
   
   return menus
 })
@@ -104,6 +120,8 @@ const onClickUserMenu = (value) => {
     logout()
   } else if (value === 'refresh-profile') {
     refreshProfile()
+  } else if (value === 'add-account') {
+    
   }
   
   emits('on-click-user-menu')
@@ -144,7 +162,7 @@ const logout = (silent = false) => {
 </script>
 
 <style lang="scss">
-.user-action {
+.app-user {
   &__connect-button {
     position: relative;
     width: 100%;
@@ -187,42 +205,30 @@ const logout = (silent = false) => {
     }
   }
   
-  &__user {
-    display: flex;
-    align-items: center;
+  &__account-list {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--bg-color);
+  }
+  
+  &__info {
     padding: 12px 16px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all .3s ease;
     
     &:hover,
     &.active {
       background: #edeff7;
     }
+    
+    .user-item__content {
+      margin: 0 12px;
+    }
+    
+    .user-item__name {
+      font-size: 14px;
+    }
   }
   
-  &__user-avatar {
-    flex-shrink: 0;
-  }
-  
-  &__user-content {
-    flex: 1;
-    min-width: 0;
-    margin: 0 12px;
-  }
-  
-  &__user-name {
-    font-size: 14px;
-    font-weight: 600;
-  }
-  
-  &__user-address {
-    margin-top: 1px;
-    font-size: 12px;
-    color: var(--text-color-muted);
-  }
-  
-  &__user-more {
+  &__info-more {
     color: var(--text-color-secondary);
   }
 }
