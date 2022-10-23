@@ -218,6 +218,10 @@ const submit = async () => {
     margin-right: 16px;
   }
   
+  &__avatar {
+    cursor: pointer;
+  }
+  
   &__body {
     flex: 1;
     min-width: 0;
