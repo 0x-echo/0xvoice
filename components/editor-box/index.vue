@@ -7,7 +7,8 @@
         class="editor-box__avatar"
         :alt="store.profile.screen_name"
         :hash="store.profile.address"
-        :src="store.profile.avatar || ''">
+        :src="store.profile.avatar || ''"
+        @click="$router.push(`/${store.profile.screen_name}`)">
       </v-avatar>
     </div>
     
