@@ -90,6 +90,10 @@
     <dialog-target
       v-model="targetDialogVisible">
     </dialog-target>
+    
+    <dialog-terms
+      v-model="termsDialogVisible">
+    </dialog-terms>
   </div>
 </template>
 
@@ -147,6 +151,8 @@ const target = {
   title: 'Credit must be given to the creator',
   desc: 'Only noncommercial uses of the work are permitted'
 }
+
+let termsDialogVisible = ref(false)
 
 const enter = async (e) => {
   if (e.metaKey) {
